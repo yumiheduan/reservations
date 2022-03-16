@@ -15,6 +15,7 @@ class CreateMembersTable extends Migration
     {
         Schema::create('members', function (Blueprint $table) {
             $table->bigIncrements('id')->comment('会員ID');
+            $table->integer('user_id')->comment('ユーザーID');
             $table->string('kana_name', 100)->collation('utf8_unicode_ci')->comment('氏名かな');
             $table->string('phone', 100)->comment('電話番号');
             $table->string('email')->comment('メールアドレス')->nullable();
