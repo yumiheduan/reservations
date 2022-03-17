@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+
 
 class MemberController extends Controller
 {
@@ -47,7 +49,8 @@ class MemberController extends Controller
      */
     public function show($id)
     {
-        //
+        $members = DB::table('members')->where('id',$id)->get();
+        return view('members.show', ['members' => $members]);
     }
 
     /**

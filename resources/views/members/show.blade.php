@@ -1,6 +1,6 @@
 @extends('layouts.reservations')
 
-@section('title', 'index')
+@section('title', 'show')
 
 @section('navbar')
     <div class="collapse navbar-collapse" id="Navbar">
@@ -21,33 +21,40 @@
 @endsection
 
 @section('content')
-    <h1>会員一覧</h1>
+    <h1>会員情報</h1>
 
     <!-- メンバー情報確認テーブル -->
     <div class="table">
         <table class="table table-striped table-bordered">
-            <thead>
+            @foreach ($members as $member)
                 <tr>
                     <th>ID</th>
-                    <th>氏名かな</th>
-                    <th>電話番号</th>
-                    <th>Email</th>
+                    <td>{{ $member->id }}</td>
                 </tr>
-            </thead>
-            <tbody>
-                @foreach ($members as $member)
-                    <tr>
-                        <td>{{ $member->id }}</td>
-                        <td>{{ $member->kana_name }}</td>
-                        <td>{{ $member->phone }}</td>
-                        <td>{{ $member->email }}</td>
-                        <td>
-                            <a href="{{ route('index.show', $member) }}" class="btn btn-primary">詳細</a>
-                        </td>
-                    </tr>
-                @endforeach
-            </tbody>
+                <tr>
+                    <th>氏名かな</th>
+                    <td>{{ $member->kana_name }}</td>
+                </tr>
+                <tr>
+                    <th>電話番号</th>
+                    <td>{{ $member->phone }}</td>
+                </tr>
+                <tr>
+                    <th>Email</th>
+                    <td>{{ $member->email }}</td>
+                </tr>
+            @endforeach
         </table>
+        <!-- 送信ボタン -->
+        <div class="row my-2">
+            <div class="my-2">
+                <a href="" class="btn btn-outline-success mb-3">予約入力</a>
+                <a href="" class="btn btn-outline-success mb-3">予約確認</a>
+                <a href="" class="btn btn-outline-secondary mb-3">情報変更</a>
+                <a href="{{ route('index') }}" class="btn btn-outline-secondary mb-3">処理終了</a>
+            </div>
+        </div>
+        <!-- 送信ボタン ここまで -->
     </div>
     <!-- メンバー情報確認テーブル ここまで -->
 
