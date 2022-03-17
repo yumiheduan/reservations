@@ -22,6 +22,7 @@
 
 @section('content')
     <h1>会員登録</h1>
+    
         <!-- 入力フォーム -->
             <form action="" method="post">
                 @csrf
