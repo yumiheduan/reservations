@@ -42,7 +42,7 @@
                         <td>{{ $member->phone }}</td>
                         <td>{{ $member->email }}</td>
                         <td>
-                            <a href="{{ route('index.show', $member) }}" class="btn btn-primary">詳細</a>
+                            <a href="{{ route('show', $member)}}" class="btn btn-primary">詳細</a>
                         </td>
                     </tr>
                 @endforeach

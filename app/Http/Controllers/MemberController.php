@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
+use App\Member;
 
 
 class MemberController extends Controller
@@ -16,8 +16,8 @@ class MemberController extends Controller
      */
     public function index()
     {
-        $members = Auth::user()->member()->get();
-        return view('members.index', compact('members'));
+        $members = Member::all();
+        return view('members.index', ['members' => $members]);
     }
 
     /**
@@ -44,13 +44,12 @@ class MemberController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Member $member)
     {
-        $members = DB::table('members')->where('id',$id)->get();
-        return view('members.show', ['members' => $members]);
+        return view('members.show', ['member' => $member]);
     }
 
     /**

@@ -20,7 +20,7 @@ Auth::routes();
 
 // Route::get('/home', 'HomeController@index')->name('home');
 
-Route::resource('/', 'MemberController')->middleware('auth');
+Route::resource('/members', 'MemberController')->middleware('auth');
 
-Route::get('/{id}', 'MemberController@show')->name('index.show');
+
 
