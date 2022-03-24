@@ -12,8 +12,10 @@
                 <a class="nav-link active" href="">会員情報</a>
             </li>
         </ul>
-        <form class="d-flex" action="" method="">
-            <input type="search" class="form-control me-sm-2" name="search" id="search" placeholder="会員検索" aria-label="会員検索">
+        <form class="d-flex" action="{{ route('members.index') }}" method="get">
+            @csrf
+            <input type="search" class="form-control me-sm-2" name="search"
+            value="" id="search" placeholder="会員検索" aria-label="会員検索">
             <button type="submit" class="btn btn-outline-light flex-shrink-0">検索</button>
         </form>
     </div><!-- /.navbar-collapse -->
@@ -22,6 +24,7 @@
 
 @section('content')
     <h1>会員一覧</h1>
+    <a href="{{route('members.create')}}" class="btn btn-success">新規追加</a>
 
     <!-- メンバー情報確認テーブル -->
     <div class="table">
@@ -42,7 +45,7 @@
                         <td>{{ $member->phone }}</td>
                         <td>{{ $member->email }}</td>
                         <td>
-                            <a href="{{ route('show', $member)}}" class="btn btn-primary">詳細</a>
+                            <a href="{{ route('members.show', $member)}}" class="btn btn-primary">会員詳細</a>
                         </td>
                     </tr>
                 @endforeach

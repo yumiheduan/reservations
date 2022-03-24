@@ -25,9 +25,9 @@ class MemberController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Member $member)
     {
-        //
+        return view('members.create', ['member' => $member]);
     }
 
     /**
@@ -38,13 +38,17 @@ class MemberController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $member = new Member();
+        $member->fill($request->all());
+        $member->save();
+
+        return redirect()->route('members.show', $member);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  
+     * @param App\Member $member
      * @return \Illuminate\Http\Response
      */
     public function show(Member $member)
@@ -55,34 +59,36 @@ class MemberController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param App\Member $member
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Member $member)
     {
-        //
+        return view('members.edit', ['member' => $member]);
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  App\Member $member
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Member $member)
     {
-        //
+        $member->fill($request->all())->save();
+        return redirect()->route('members.show', $member);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  \app\member $member
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Member $member)
     {
-        //
+        $member->delete();
+        return redirect()->route('members.index');
     }
 }
