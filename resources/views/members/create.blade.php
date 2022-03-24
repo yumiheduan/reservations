@@ -1,6 +1,6 @@
 @extends('layouts.reservations')
 
-@section('title', 'create')
+@section('title', 'members_create')
 
 @section('navbar')
     <div class="collapse navbar-collapse" id="Navbar">
