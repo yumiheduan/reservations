@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Reservation;
 
 class ReservationController extends Controller
 {
@@ -13,7 +14,8 @@ class ReservationController extends Controller
      */
     public function index()
     {
-        //
+        $reservations = Reservation::with('member')->get();
+        return view('reservations.index', ['reservations' => $reservations]);
     }
 
     /**
