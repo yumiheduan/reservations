@@ -27,10 +27,6 @@
     <div class="table">
         <table class="table table-striped table-bordered">
             <tr>
-                <th>ID</th>
-                <td>{{ $member->id }}</td>
-            </tr>
-            <tr>
                 <th>氏名かな</th>
                 <td>{{ $member->kana_name }}</td>
             </tr>
