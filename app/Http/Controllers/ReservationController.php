@@ -23,9 +23,9 @@ class ReservationController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Reservation $reservations)
     {
-        //
+        return view('reservations.create', ['reservations' => $reservations]);
     }
 
     /**

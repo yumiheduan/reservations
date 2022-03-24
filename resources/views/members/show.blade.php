@@ -46,7 +46,7 @@
             @csrf
             <div class="row my-2">
                 <div class="my-2">
-                    <a href="{{ route('reservations.create') }}" class="btn btn-success mb-3">予約入力</a>
+                    <a href="{{ route('reservations.create', $member) }}" class="btn btn-success mb-3">予約入力</a>
                     <a href="{{ route('reservations.index', $member) }}" class="btn btn-outline-success mb-3">予約確認</a>
                     <a href="{{ route('members.edit', $member) }}" class="btn btn-outline-secondary mb-3">情報変更</a>
                     <button type="submit" class="btn btn-outline-danger mb-3"

@@ -21,38 +21,56 @@
 @endsection
 
 @section('content')
-    <h1>会員登録</h1>
+    <h1>予約登録</h1>
 
-    <!-- 入力フォーム -->
-    <form action="{{ route('members.store') }}" method="post">
-        @csrf
-        <div class="my-4 row">
-            <label for="kana_name" class="col-sm-2 col-form-label">氏名かな</label>
-            <div class="col-sm-10">
-                <input type="text" class="form-control" name="kana_name" id="kana_name" value="{{ old('kana_name') }}"
-                    placeholder="ひらがな入力 スペースなし">
-            </div>
-        </div>
-        <div class="my-4 row">
-            <label for="phone" class="col-sm-2 col-form-label">電話番号</label>
-            <div class="col-sm-10">
-                <input type="text" class="form-control" name="phone" id="phone" value="{{ old('phone') }}"
-                    placeholder="半角数字 ハイフンなし">
-            </div>
-        </div>
-        <div class="my-4 row">
-            <label for="email" class="col-sm-2 col-form-label">Email</label>
-            <div class="col-sm-10">
-                <input type="email" class="form-control" name="email" id="email" value="{{ old('email') }}">
-            </div>
-        </div>
+    <!-- 予約フォーム -->
+    <div class="row my-2">
+        <form action="{{ route('reservations.store') }}" method="post">
+            @csrf
+            <div class="col-md">
+                <div class="card border-success">
+                    <div class="card-header text-white bg-success">
+                        さん
+                    </div>
 
-        <div class="my-2">
-                <button class="btn btn-primary" type="submit">会員登録</button>
-                <a href="{{ route('members.index') }}" class="btn btn-outline-secondary">もどる</a>
-        </div>
-    </form>
-    </div>
-    <!-- 入力フォーム ここまで -->
+                    <div class="card-body text-success">
+                        <div class="mb-3">
+                            <label for="reservation_time" class="form-label">-- 予約日 --</label>
+                            <input type="date" class="form-control" name="reservation_time" id="reservation_time"
+                                value="{{ old('reservation_time') }}">
+                        </div>
 
-@endsection
+                        <div class="my-3">
+                            <label for="room_id" class="form-label">-- 部屋の種類 --</label>
+                            <select class="form-select" id="room_id" name="room_id">
+                                <option></option>
+                                <option value="1">スタジオA</option>
+                                <option value="2">スタジオB</option>
+                            </select>
+                        </div>
+
+                        <div class="my-3">
+                            <label for="utilization_time" class="form-label">-- 利用時間 --</label>
+                            <select class="form-select" id="utilization_time" name="utilization_time">
+                                <option></option>
+                                <option value="1">1時間</option>
+                                <option value="2">2時間</option>
+                                <option value="3">3時間</option>
+                                <option value="4">4時間</option>
+                                <option value="5">5時間</option>
+                                <option value="6">6時間</option>
+                            </select>
+                        </div>
+                    </div>
+                    <!-- 予約フォーム ここまで -->
+
+                    <!-- 送信ボタン -->
+                    <div class="my-3 mx-3">
+                        <button type="submit" class="btn btn-success mb-3" name="btn_confirm">予約登録</button>
+                        <a href="{{ route('members.show') }}" class="btn btn-outline-secondary">もどる</a>
+                    </div>
+                </div>
+        </form>
+        <!-- 送信ボタン ここまで -->
+
+    @endsection
