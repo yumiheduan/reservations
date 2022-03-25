@@ -21,7 +21,7 @@
 @endsection
 
 @section('content')
-    <h1>予約登録</h1>
+    <h1>会員予約登録</h1>
 
     <!-- 予約フォーム -->
     <div class="row my-2">
