@@ -41,21 +41,32 @@
         </table>
 
         <!-- 送信ボタン -->
-        <form action="{{ route('members.destroy', $member) }}" method="post" class="form-inline">
-            @method('DELETE')
-            @csrf
-            <div class="row my-2">
-                <div class="my-2">
-                    <a href="{{ route('reservations.create', $member) }}" class="btn btn-success mb-3">予約入力</a>
-                    <a href="{{ route('reservations.index', $member) }}" class="btn btn-outline-success mb-3">予約確認</a>
-                    <a href="{{ route('members.edit', $member) }}" class="btn btn-outline-secondary mb-3">情報変更</a>
+        <div class="row my-2">
+            <div class="my-2">
+                <form action="{{ route('reservations.create') }}" method="post" class="form-inline">
+                    @csrf
+                    <input type="hidden" name="member_id" value="{{ $member->id }}">
+                    <button class="btn btn-success mb-3">予約入力</button>
+                </form>
+
+                <form action="{{ route('reservations.index') }}" method="get" class="form-inline">
+                    @csrf
+                    <input type="hidden" name="member_id" value="{{ $member->id }}">
+                    <button class="btn btn-success mb-3">予約一覧</button>
+                </form>
+
+                <a href="{{ route('members.edit', $member) }}" class="btn btn-outline-secondary mb-3">情報変更</a>
+
+                <form action="{{ route('members.destroy', $member) }}" method="post" class="form-inline">
+                    @method('DELETE')
+                    @csrf
                     <button type="submit" class="btn btn-outline-danger mb-3"
                         onclick="return confirm('本当に削除しますか?');">会員削除</button>
-                    <a href="{{ route('members.index') }}" class="btn btn-secondary mb-3">処理終了</a>
-                </div>
+                </form>
+                <a href="{{ route('members.index') }}" class="btn btn-secondary mb-3">処理終了</a>
             </div>
-        </form>
-            <!-- 送信ボタン ここまで -->
+        </div>
+        <!-- 送信ボタン ここまで -->
     </div>
     <!-- メンバー情報確認テーブル ここまで -->
 

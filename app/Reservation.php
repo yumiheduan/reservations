@@ -6,9 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Reservation extends Model
 {
-    public function member()
+    public function room()
     {
-        return $this->belongsTo('App\Member');
-        return $this->hasOne('App\Room');
+        return $this->hasone('App\room');
     }
 }

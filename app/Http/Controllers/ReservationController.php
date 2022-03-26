@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Reservation;
+use App\Member;
 
 class ReservationController extends Controller
 {
@@ -12,10 +13,11 @@ class ReservationController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $reservations = Reservation::with('member')->get();
-        return view('reservations.index', ['reservations' => $reservations]);
+        $member = Member::find($request->member_id);
+        $reservations = Reservation::where('member_id', $member);
+        return view('reservations.index', ['member' => $member, 'reservations' => $reservations]);
     }
 
     /**

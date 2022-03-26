@@ -24,7 +24,9 @@
 
 @section('content')
     <h1>予約一覧</h1>
-
+    <div class="card-header text-white bg-success">
+        {{ $member->kana_name }} 様
+    </div>
     <!-- 予約情報確認テーブル -->
     <div class="table">
         <table class="table table-striped table-bordered">
@@ -48,6 +50,9 @@
                 @endforeach
             </tbody>
         </table>
+        <div class="my-2">
+            <a href="{{ route('members.show', $member)}}" class="btn btn-outline-secondary mb-3">もどる</a>
+        </div>
     </div>
     <!-- メンバー情報確認テーブル ここまで -->
 

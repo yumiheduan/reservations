@@ -46,13 +46,14 @@
                 <input type="email" class="form-control" name="email" id="email" value="{{ old('email') }}">
             </div>
         </div>
+        <!-- 入力フォーム ここまで -->
 
+        <!-- 送信ボタン -->
         <div class="my-2">
                 <button class="btn btn-primary" type="submit">会員登録</button>
                 <a href="{{ route('members.index') }}" class="btn btn-outline-secondary">もどる</a>
         </div>
     </form>
-    </div>
-    <!-- 入力フォーム ここまで -->
+    <!-- 送信ボタン ここまで -->
 
 @endsection
