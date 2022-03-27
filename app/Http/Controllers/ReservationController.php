@@ -38,7 +38,13 @@ class ReservationController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $member = Member::find($request->member_id);
+        $reservation = new Reservation();
+        $reservation->fill($request->all());
+        $reservation->member_id = $request->member_id;
+        $reservation->save();
+
+        return redirect()->route('reservations.index', $reservation, ['member' => $member]);
     }
 
     /**

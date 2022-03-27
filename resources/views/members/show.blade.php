@@ -43,27 +43,31 @@
         <!-- 送信ボタン -->
         <div class="row my-2">
             <div class="my-2">
-                <form action="{{ route('reservations.create') }}" method="post" class="form-inline">
-                    @csrf
-                    <input type="hidden" name="member_id" value="{{ $member->id }}">
-                    <button class="btn btn-success mb-3">予約入力</button>
-                </form>
+                <div class="btn-toolbar">
+                    <div class="btn-group">
+                        <form action="{{ route('reservations.create') }}" method="get" class="form-inline">
+                            @csrf
+                            <input type="hidden" name="member_id" value="{{ $member->id }}">
+                            <button class="btn btn-success mb-3">予約入力</button>
+                        </form>
 
-                <form action="{{ route('reservations.index') }}" method="get" class="form-inline">
-                    @csrf
-                    <input type="hidden" name="member_id" value="{{ $member->id }}">
-                    <button class="btn btn-success mb-3">予約一覧</button>
-                </form>
+                        <form action="{{ route('reservations.index') }}" method="get" class="form-inline">
+                            @csrf
+                            <input type="hidden" name="member_id" value="{{ $member->id }}">
+                            <button class="btn btn-outline-success mb-3">予約一覧</button>
+                        </form>
 
-                <a href="{{ route('members.edit', $member) }}" class="btn btn-outline-secondary mb-3">情報変更</a>
+                        <a href="{{ route('members.edit', $member) }}" class="btn btn-secondary mb-3">情報変更</a>
 
-                <form action="{{ route('members.destroy', $member) }}" method="post" class="form-inline">
-                    @method('DELETE')
-                    @csrf
-                    <button type="submit" class="btn btn-outline-danger mb-3"
-                        onclick="return confirm('本当に削除しますか?');">会員削除</button>
-                </form>
-                <a href="{{ route('members.index') }}" class="btn btn-secondary mb-3">処理終了</a>
+                        <form action="{{ route('members.destroy', $member) }}" method="post" class="form-inline">
+                            @method('DELETE')
+                            @csrf
+                            <button type="submit" class="btn btn-outline-danger mb-3"
+                                onclick="return confirm('本当に削除しますか?');">会員削除</button>
+                        </form>
+                        <a href="{{ route('members.index') }}" class="btn btn-outline-secondary mb-3">処理終了</a>
+                    </div>
+                </div>
             </div>
         </div>
         <!-- 送信ボタン ここまで -->

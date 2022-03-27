@@ -28,7 +28,7 @@
         @csrf
         <div class="col-md">
             <div class="card-header text-white bg-success">
-                さん
+                様
             </div>
             <div class="my-4 row">
                 <label for="reservation_time" class="form-label">予約日時</label>
