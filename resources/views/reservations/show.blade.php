@@ -44,13 +44,30 @@
             </tr>
         </table>
 
-        <div class="my-2">
-            <form action="{{ route('reservations.index') }}" method="get" class="form-inline">
-                @csrf
-                <input type="hidden" name="member_id" value="{{ $member->id }}">
-                <button class="btn btn-outline-success mb-3">予約一覧</button>
-            </form>
+        <!-- 送信ボタン -->
+        <div class="row my-2">
+            <div class="my-2">
+                <div class="btn-toolbar">
+                    <div class="btn-group">
+                        <form action="{{ route('reservations.index') }}" method="get" class="form-inline">
+                            @csrf
+                            <input type="hidden" name="member_id" value="{{ $member->id }}">
+                            <button class="btn btn-outline-success mb-3">予約一覧</button>
+                        </form>
+
+                        <a href="{{ route('reservations.edit', $reservation) }}" class="btn btn-secondary mb-3">予約変更</a>
+
+                        <form action="{{ route('reservations.destroy', $reservation) }}" method="post" class="form-inline">
+                            @method('DELETE')
+                            @csrf
+                            <button type="submit" class="btn btn-outline-danger mb-3"
+                                onclick="return confirm('本当に予約を削除しますか?');">予約削除</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
         </div>
+        <!-- 送信ボタン ここまで -->
     </div>
     <!-- 予約詳細確認テーブル ここまで -->
 

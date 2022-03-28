@@ -16,6 +16,9 @@ class ReservationController extends Controller
      */
     public function index(Request $request)
     {
+        if(!($request->session()->get('id') == null)){
+            $request->member_id = $request->session()->get('id');
+        }
         $member = Member::find($request->member_id);
         $reservations = Reservation::where('member_id', $request->member_id)->get();
         return view('reservations.index', ['member' => $member, 'reservations' => $reservations]);
@@ -89,8 +92,10 @@ class ReservationController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Reservation $reservation, Request $request)
     {
-        //
+        $reservation->delete();
+        $request->member_id = $reservation->member_id;
+        return redirect()->route('reservations.index')->with(['id' =>$request->member_id]);
     }
 }

@@ -54,6 +54,6 @@
             <a href="{{ route('members.show', $member)}}" class="btn btn-outline-secondary mb-3">会員詳細</a>
         </div>
     </div>
-    <!-- メンバー情報確認テーブル ここまで -->
+    <!-- 予約情報確認テーブル ここまで -->
 
 @endsection
