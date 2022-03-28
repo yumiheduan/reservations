@@ -8,7 +8,7 @@ class Reservation extends Model
 {
     public function room()
     {
-        return $this->hasone('App\room');
+        return $this->hasone('App\Room');
     }
 
     /** @var array 値を代入しないプロパティ */

@@ -26,9 +26,10 @@
     <!-- 入力フォーム -->
     <form action="{{ route('reservations.store') }}" method="post">
         @csrf
+        <input type="hidden" name="member_id" value="{{ $member->id }}">
         <div class="col-md">
             <div class="card-header text-white bg-success">
-                様
+                {{ $member->kana_name }} 様
             </div>
             <div class="my-4 row">
                 <label for="reservation_time" class="form-label">予約日時</label>
@@ -69,7 +70,7 @@
         <!-- 送信ボタン -->
         <div class="my-2">
             <button type="submit" class="btn btn-success mb-3" name="btn_confirm">予約登録</button>
-            <a href="" class="btn btn-outline-secondary mb-3">もどる</a>
+            <a href="{{ route('members.show', $member) }}" class="btn btn-outline-secondary mb-3">もどる</a>
         </div>
     </form>
     <!-- 送信ボタン ここまで -->

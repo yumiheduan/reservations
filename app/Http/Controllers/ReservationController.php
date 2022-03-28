@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Reservation;
 use App\Member;
+use App\Room;
 
 class ReservationController extends Controller
 {
@@ -16,7 +17,7 @@ class ReservationController extends Controller
     public function index(Request $request)
     {
         $member = Member::find($request->member_id);
-        $reservations = Reservation::where('member_id', $member);
+        $reservations = Reservation::where('member_id', $request->member_id)->get();
         return view('reservations.index', ['member' => $member, 'reservations' => $reservations]);
     }
 
@@ -25,9 +26,10 @@ class ReservationController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(Reservation $reservations)
+    public function create(Request $request, Reservation $reservations)
     {
-        return view('reservations.create', ['reservations' => $reservations]);
+        $member = Member::find($request->member_id);
+        return view('reservations.create', ['member' => $member, 'reservations' => $reservations]);
     }
 
     /**
@@ -38,13 +40,12 @@ class ReservationController extends Controller
      */
     public function store(Request $request)
     {
-        $member = Member::find($request->member_id);
         $reservation = new Reservation();
         $reservation->fill($request->all());
         $reservation->member_id = $request->member_id;
         $reservation->save();
 
-        return redirect()->route('reservations.index', $reservation, ['member' => $member]);
+        return redirect()->route('reservations.show', $reservation);
     }
 
     /**
@@ -53,9 +54,10 @@ class ReservationController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Reservation $reservation)
     {
-        //
+        $member = Member::find($reservation->member_id);
+        return view('reservations.show', ['member' => $member, 'reservation' => $reservation]);
     }
 
     /**

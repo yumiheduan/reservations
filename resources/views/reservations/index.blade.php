@@ -51,7 +51,7 @@
             </tbody>
         </table>
         <div class="my-2">
-            <a href="{{ route('members.show', $member)}}" class="btn btn-outline-secondary mb-3">もどる</a>
+            <a href="{{ route('members.show', $member)}}" class="btn btn-outline-secondary mb-3">会員詳細</a>
         </div>
     </div>
     <!-- メンバー情報確認テーブル ここまで -->
