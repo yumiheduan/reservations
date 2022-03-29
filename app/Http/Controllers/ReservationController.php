@@ -16,7 +16,7 @@ class ReservationController extends Controller
      */
     public function index(Request $request)
     {
-        if(!($request->session()->get('id') == null)){
+        if (!($request->session()->get('id') == null)) {
             $request->member_id = $request->session()->get('id');
         }
         $member = Member::find($request->member_id);
@@ -60,7 +60,8 @@ class ReservationController extends Controller
     public function show(Reservation $reservation)
     {
         $member = Member::find($reservation->member_id);
-        return view('reservations.show', ['member' => $member, 'reservation' => $reservation]);
+        $room = Room::where('id', $reservation->room_id)->first();
+        return view('reservations.show', ['member' => $member, 'reservation' => $reservation, 'room' => $room]);
     }
 
     /**
@@ -69,9 +70,11 @@ class ReservationController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Reservation $reservation)
     {
-        //
+        $member = Member::find($reservation->member_id);
+        $room = Room::where('id', $reservation->room_id)->first();
+        return view('reservations.edit', ['member' => $member, 'reservation' => $reservation, 'room' => $room]);
     }
 
     /**
@@ -81,9 +84,10 @@ class ReservationController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Reservation $reservation)
     {
-        //
+        $reservation->fill($request->all())->save();
+        return redirect()->route('reservations.show', $reservation);
     }
 
     /**
@@ -96,6 +100,6 @@ class ReservationController extends Controller
     {
         $reservation->delete();
         $request->member_id = $reservation->member_id;
-        return redirect()->route('reservations.index')->with(['id' =>$request->member_id]);
+        return redirect()->route('reservations.index')->with(['id' => $request->member_id]);
     }
 }

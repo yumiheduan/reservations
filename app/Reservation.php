@@ -11,8 +11,5 @@ class Reservation extends Model
         return $this->hasone('App\Room');
     }
 
-    /** @var array 値を代入しないプロパティ */
-    protected $guarded = [
-        'id',
-    ];
+    protected $guarded = ['id',];
 }

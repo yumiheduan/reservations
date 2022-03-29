@@ -40,7 +40,7 @@
             </tr>
             <tr>
                 <th>部屋情報</th>
-                <td>{{ $reservation->room_id }}</td>
+                <td>{{ $room->room_type }}</td>
             </tr>
         </table>
 

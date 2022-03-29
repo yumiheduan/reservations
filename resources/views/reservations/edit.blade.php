@@ -1,6 +1,6 @@
 @extends('layouts.reservations')
 
-@section('title', 'reservations_create')
+@section('title', 'reservations_edit')
 
 @section('navbar')
     <div class="collapse navbar-collapse" id="Navbar">
@@ -21,11 +21,12 @@
 @endsection
 
 @section('content')
-    <h1>予約登録</h1>
+    <h1>予約変更</h1>
 
-    <!-- 入力フォーム -->
-    <form action="{{ route('reservations.store') }}" method="post">
+    <!-- 変更フォーム -->
+    <form action="{{ route('reservations.update', $reservation) }}" method="post">
         @csrf
+        @method('PATCH')
         <input type="hidden" name="member_id" value="{{ $member->id }}">
         <div class="col-md">
             <div class="card-header text-white bg-success">
@@ -35,7 +36,7 @@
                 <label for="reservation_time" class="form-label">予約日時</label>
                 <div class="col-sm-10">
                     <input type="datetime-local" class="form-control" name="reservation_time" id="reservation_time"
-                        value="{{ old('reservation_time') }}">
+                    value="">
                 </div>
             </div>
 
@@ -69,7 +70,7 @@
 
         <!-- 送信ボタン -->
         <div class="my-2">
-            <button type="submit" class="btn btn-success mb-3" name="btn_confirm">予約登録</button>
+            <button type="submit" class="btn btn-success mb-3" name="btn_confirm">予約変更</button>
             <a href="{{ route('members.show', $member) }}" class="btn btn-outline-secondary mb-3">もどる</a>
         </div>
     </form>
