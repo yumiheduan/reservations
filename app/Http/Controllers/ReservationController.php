@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Reservation;
 use App\Member;
 use App\Room;
+use Carbon\Carbon;
 
 class ReservationController extends Controller
 {
@@ -102,4 +103,28 @@ class ReservationController extends Controller
         $request->member_id = $reservation->member_id;
         return redirect()->route('reservations.index')->with(['id' => $request->member_id]);
     }
+    /**
+     * Undocumented function
+     *
+     * @param [type] $year
+     * @param [type] $month
+     * @return void
+     */
+    // public function getCalendarDates($year, $month)
+    // {
+    //     $dateStr = sprintf('%04d-%02d-01', $year, $month);
+    //     $date = new Carbon($dateStr);
+    //     // カレンダーを四角形にするため、前月となる左上の隙間用のデータを入れるためずらす
+    //     $date->subDay($date->dayOfWeek);
+    //     // 同上。右下の隙間のための計算。
+    //     $count = 31 + $date->dayOfWeek;
+    //     $count = ceil($count / 7) * 7;
+    //     $dates = [];
+
+    //     for ($i = 0; $i < $count; $i++, $date->addDay()) {
+    //         // copyしないと全部同じオブジェクトを入れてしまうことになる
+    //         $dates[] = $date->copy();
+    //     }
+    //     return view('reservations.index', $dates);
+    // }
 }
