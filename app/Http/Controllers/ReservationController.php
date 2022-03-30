@@ -6,7 +6,6 @@ use Illuminate\Http\Request;
 use App\Reservation;
 use App\Member;
 use App\Room;
-use Carbon\Carbon;
 
 class ReservationController extends Controller
 {
@@ -63,7 +62,7 @@ class ReservationController extends Controller
 
             $request->start_time++;
         }
-        
+
         return redirect()->route('reservations.show', $reservation);
     }
 
