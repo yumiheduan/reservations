@@ -44,10 +44,27 @@ class ReservationController extends Controller
      */
     public function store(Request $request)
     {
-        $reservation = new Reservation();
-        $reservation->fill($request->all());
-        $reservation->member_id = $request->member_id;
-        $reservation->save();
+        // データベースに登録する内容を連想配列にする。
+        $reservation_data = array(
+            'member_id' => $request->member_id,
+            // 'reservation_time' => $reservation_time,
+            'utilization_time' => $request->utilization_time,
+            'room_id' => $request->room_id,
+        );
+
+        // 使用時間分をループするため$numに代入
+        $num = $request->utilization_time;
+
+        // reservationテーブルへレコードのインサート
+        for ($i = 1; $i <= $num; $i++) {
+            $reservation = new Reservation();
+            $reservation->fill($reservation_data);
+            $reservation->reservation_time = $request->reservation_date . ' '. $request->start_time. ':00';
+            $reservation->save();
+
+            $request->start_time++;
+        }
+
 
         return redirect()->route('reservations.show', $reservation);
     }
@@ -61,7 +78,7 @@ class ReservationController extends Controller
     public function show(Reservation $reservation)
     {
         $member = Member::find($reservation->member_id);
-        $room = Room::where('id', $reservation->room_id)->first();
+        $room = Room::find($reservation->room_id);
         return view('reservations.show', ['member' => $member, 'reservation' => $reservation, 'room' => $room]);
     }
 

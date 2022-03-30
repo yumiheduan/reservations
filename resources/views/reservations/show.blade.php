@@ -36,34 +36,32 @@
             </tr>
             <tr>
                 <th>利用時間</th>
-                <td>{{ $reservation->utilization_time }}</td>
+                <td>{{ $reservation->utilization_time }}時間</td>
             </tr>
             <tr>
                 <th>部屋情報</th>
-                <td>{{ $room->room_type }}</td>
+                <td>{{ $room->room_type }}スタジオ</td>
             </tr>
         </table>
 
         <!-- 送信ボタン -->
-        <div class="row my-2">
-            <div class="my-2">
-                <div class="btn-toolbar">
-                    <div class="btn-group">
-                        <form action="{{ route('reservations.index') }}" method="get" class="form-inline">
-                            @csrf
-                            <input type="hidden" name="member_id" value="{{ $member->id }}">
-                            <button class="btn btn-outline-success mb-3">予約一覧</button>
-                        </form>
+        <div class="my-2">
+            <div class="btn-toolbar">
+                <div class="btn-group">
+                    <form action="{{ route('reservations.index') }}" method="get" class="form-inline">
+                        @csrf
+                        <input type="hidden" name="member_id" value="{{ $member->id }}">
+                        <button class="btn btn-outline-success mb-3">予約一覧</button>
+                    </form>
 
-                        <a href="{{ route('reservations.edit', $reservation) }}" class="btn btn-secondary mb-3">予約変更</a>
+                    <a href="{{ route('reservations.edit', $reservation) }}" class="btn btn-secondary mb-3">予約変更</a>
 
-                        <form action="{{ route('reservations.destroy', $reservation) }}" method="post" class="form-inline">
-                            @method('DELETE')
-                            @csrf
-                            <button type="submit" class="btn btn-outline-danger mb-3"
-                                onclick="return confirm('本当に予約を削除しますか?');">予約削除</button>
-                        </form>
-                    </div>
+                    <form action="{{ route('reservations.destroy', $reservation) }}" method="post" class="form-inline">
+                        @method('DELETE')
+                        @csrf
+                        <button type="submit" class="btn btn-outline-danger mb-3"
+                            onclick="return confirm('本当に予約を削除しますか?');">予約削除</button>
+                    </form>
                 </div>
             </div>
         </div>

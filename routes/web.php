@@ -23,6 +23,3 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::resource('/members', 'MemberController')->middleware('auth');
 
 Route::resource('/reservations', 'ReservationController')->middleware('auth');
-
-
-
