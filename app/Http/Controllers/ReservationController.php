@@ -47,7 +47,6 @@ class ReservationController extends Controller
         // データベースに登録する内容を連想配列にする。
         $reservation_data = array(
             'member_id' => $request->member_id,
-            // 'reservation_time' => $reservation_time,
             'utilization_time' => $request->utilization_time,
             'room_id' => $request->room_id,
         );
