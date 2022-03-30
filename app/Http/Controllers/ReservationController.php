@@ -63,8 +63,7 @@ class ReservationController extends Controller
 
             $request->start_time++;
         }
-
-
+        
         return redirect()->route('reservations.show', $reservation);
     }
 
