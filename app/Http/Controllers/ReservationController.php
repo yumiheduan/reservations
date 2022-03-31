@@ -51,17 +51,17 @@ class ReservationController extends Controller
         );
 
         // 使用時間分をループするため$numに代入
-        $num = $request->utilization_time;
+        // $num = $request->utilization_time;
 
         // reservationテーブルへレコードのインサート
-        for ($i = 1; $i <= $num; $i++) {
+        // for ($i = 1; $i <= $num; $i++) {
             $reservation = new Reservation();
             $reservation->fill($reservation_data);
-            $reservation->reservation_time = $request->reservation_date . ' '. $request->start_time. ':00';
+            $reservation->reservation_time = $request->reservation_date . ' '. $request->start_time. ':00:00';
             $reservation->save();
 
-            $request->start_time++;
-        }
+            // $request->start_time++;
+        // }
 
         return redirect()->route('reservations.show', $reservation);
     }

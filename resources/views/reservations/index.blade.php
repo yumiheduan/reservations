@@ -46,9 +46,23 @@
                 @endforeach
             </tbody>
         </table>
-        <div class="my-2">
-            <a href="{{ route('members.show', $member) }}" class="btn btn-outline-secondary mb-3">会員詳細</a>
+
+        <!-- 送信ボタン -->
+        <div class="row my-2">
+            <div class="my-2">
+                <div class="btn-toolbar">
+                    <div class="btn-group">
+                        <form action="{{ route('reservations.create') }}" method="get" class="form-inline">
+                            @csrf
+                            <input type="hidden" name="member_id" value="{{ $member->id }}">
+                            <button class="btn btn-success mb-3">予約入力</button>
+                        </form>
+                        <a href="{{ route('members.show', $member) }}" class="btn btn-outline-secondary mb-3">会員詳細</a>
+                    </div>
+                </div>
+            </div>
         </div>
+        <!-- 送信ボタン ここまで -->
     </div>
     <!-- 予約情報確認テーブル ここまで -->
 

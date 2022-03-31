@@ -1,5 +1,12 @@
 @extends('layouts.reservations')
 
+<style>
+    input[type="date"] {
+        width: 200px;
+    }
+
+</style>
+
 @section('title', 'reservations_create')
 
 @section('navbar')

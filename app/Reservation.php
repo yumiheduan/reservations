@@ -12,4 +12,5 @@ class Reservation extends Model
     }
 
     protected $guarded = ['id',];
+    protected $dates = ['reservation_time'];
 }
