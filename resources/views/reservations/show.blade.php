@@ -32,7 +32,7 @@
         <table class="table table-striped table-bordered">
             <tr>
                 <th>予約日時</th>
-                <td>{{ $reservation->reservation_time }}</td>
+                <td>{{ $reservation['reservation_time']->format('Y年m月d日 H時') }}</td>
             </tr>
             <tr>
                 <th>利用時間</th>

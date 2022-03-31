@@ -13,9 +13,7 @@ class Member extends Model
     {
         return $this->hasMany("App\Reservation");
     }
+
+    protected $guarded = ['id',];
     
-    /** @var array 値を代入しないプロパティ */
-    protected $guarded = [
-        'id',
-    ];
 }
