@@ -41,7 +41,6 @@ class MemberRequest extends FormRequest
             'kana_name.max:100' => '氏名かなは100文字以下にしてください。',
             'phone.required' => '電話番号を入力してください。',
             'phone.max:100' => '電話番号は100文字以下にしてください。',
-            'email.email' => 'Emsilは正しい形式で入力してください。',
             'email.email' => 'Emsilは255文字以下にしてください。',
         ];
     }
