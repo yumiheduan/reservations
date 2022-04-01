@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\MemberRequest;
 use App\Member;
 
 
@@ -35,7 +36,7 @@ class MemberController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(MemberRequest $request)
     {
         $member = new Member();
         $member->fill($request->all());
@@ -73,7 +74,7 @@ class MemberController extends Controller
      * @param  App\Member $member
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Member $member)
+    public function update(MemberRequest $request, Member $member)
     {
         $member->fill($request->all())->save();
         return redirect()->route('members.show', $member);
