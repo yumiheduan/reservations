@@ -30,21 +30,39 @@
         <div class="my-4 row">
             <label for="kana_name" class="col-sm-2 col-form-label">氏名かな</label>
             <div class="col-sm-10">
-                <input type="text" class="form-control" name="kana_name" id="kana_name" value="{{ old('kana_name',$member->kana_name) }}"
+                <input type="text" name="kana_name" id="kana_name"
+                class="form-control @error('kana_name') is-invalid @enderror " value="{{ old('kana_name',$member->kana_name) }}"
                     placeholder="ひらがな入力 スペースなし">
+                    @error('kana_name')
+                    <div id="validateKana_name" class="invalid-feedback">
+                        {{ $message }}
+                    </div>
+                @enderror
             </div>
         </div>
         <div class="my-4 row">
             <label for="phone" class="col-sm-2 col-form-label">電話番号</label>
             <div class="col-sm-10">
-                <input type="text" class="form-control" name="phone" id="phone" value="{{ old('phone', $member->phone) }}"
-                    placeholder="半角数字 ハイフンなし">
+                <input type="text"　name="phone" id="phone"
+                class="form-control @error('phone') is-invalid @enderror " value="{{ old('phone', $member->phone) }}"
+                    placeholder="半角数字入力">
+                    @error('phone')
+                    <div id="validatePhone" class="invalid-feedback">
+                        {{ $message }}
+                    </div>
+                @enderror
             </div>
         </div>
         <div class="my-4 row">
             <label for="email" class="col-sm-2 col-form-label">Email</label>
             <div class="col-sm-10">
-                <input type="email" class="form-control" name="email" id="email" value="{{ old('email', $member->email) }}">
+                <input type="email" name="email" id="email"
+                class="form-control @error('email"') is-invalid @enderror " value="{{ old('email', $member->email) }}">
+                @error('email"')
+                    <div id="validate Email" class="invalid-feedback">
+                        {{ $message }}
+                    </div>
+                @enderror
             </div>
         </div>
 
