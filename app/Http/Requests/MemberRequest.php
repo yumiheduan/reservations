@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class MemberRequest extends FormRequest
 {
@@ -24,8 +25,15 @@ class MemberRequest extends FormRequest
     public function rules()
     {
         return [
-            'kana_name' =>  'required|max:100',
-            'phone' => 'required|max:100',
+            'kana_name' =>  'required|max:100|regex:/^[ぁ-んー]+$/',
+            'phone' => [
+                'regex:/^[0-9]+$/',
+                // membersテーブルでユニーク制約。ignoreで入力されたidはバリデーションから除外する
+                Rule::unique('members')->ignore($this->id)->where(function ($query) {
+                    // 入力されたkana_nameの値と同じ値を持つレコードでのみ検証する
+                    $query->where('kana_name', $this->kana_name);
+                }),
+            ],
             'email' => 'nullable|email|max:255',
         ];
     }
@@ -39,9 +47,10 @@ class MemberRequest extends FormRequest
         return [
             'kana_name.required' => '氏名かなを入力してください。',
             'kana_name.max:100' => '氏名かなは100文字以下にしてください。',
-            'phone.required' => '電話番号を入力してください。',
-            'phone.max:100' => '電話番号は100文字以下にしてください。',
-            'email.email' => 'Emsilは255文字以下にしてください。',
+            'kana_name.regex'=> '氏名かなはひらがなだけで入力してください。',
+            'phone.regex' => '電話番号はハイフンなしの半角数字で入力してください。',
+            'phone.unique' => 'このメンバーはすでに登録されています。',
+            'email.email' => 'Emailは255文字以下にしてください。',
         ];
     }
 }

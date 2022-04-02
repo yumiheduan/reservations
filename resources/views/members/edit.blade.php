@@ -27,6 +27,7 @@
     <form action="{{ route('members.update', $member) }}" method="post">
         @csrf
         @method('PATCH')
+        <input type="hidden" name="id" value="{{ $member->id }}">
         <div class="my-4 row">
             <label for="kana_name" class="col-sm-2 col-form-label">氏名かな</label>
             <div class="col-sm-10">
@@ -43,7 +44,7 @@
         <div class="my-4 row">
             <label for="phone" class="col-sm-2 col-form-label">電話番号</label>
             <div class="col-sm-10">
-                <input type="text"　name="phone" id="phone"
+                <input type="text" name="phone" id="phone"
                 class="form-control @error('phone') is-invalid @enderror " value="{{ old('phone', $member->phone) }}"
                     placeholder="半角数字入力">
                     @error('phone')
