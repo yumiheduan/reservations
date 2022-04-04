@@ -23,7 +23,7 @@
 @section('content')
     <h1>予約変更</h1>
 
-    <!-- 予約変更フォーム -->
+    <!-- 変更フォーム -->
     <form action="{{ route('reservations.update', $reservation) }}" method="post">
         @csrf
         @method('PATCH')
@@ -107,7 +107,7 @@
                 @enderror
             </div>
         </div>
-        <!-- 予約変更フォーム ここまで -->
+        <!-- 予約フォーム ここまで -->
 
         <!-- 送信ボタン -->
         <div class="my-2">
