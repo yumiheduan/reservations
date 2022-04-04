@@ -18,7 +18,7 @@ class MemberRequest extends FormRequest
     }
 
     /**
-     * Get the validation rules that apply to the request.
+     * リクエストに適用される検証ルールを取得する。
      *
      * @return array
      */

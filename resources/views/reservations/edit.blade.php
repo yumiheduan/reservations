@@ -23,7 +23,7 @@
 @section('content')
     <h1>予約変更</h1>
 
-    <!-- 変更フォーム -->
+    <!-- 予約変更フォーム -->
     <form action="{{ route('reservations.update', $reservation) }}" method="post">
         @csrf
         @method('PATCH')
@@ -32,41 +32,82 @@
             <div class="card-header text-white bg-success">
                 {{ $member->kana_name }} 様
             </div>
-            <div class="my-4 row">
-                <label for="reservation_time" class="form-label">予約日時</label>
-                <div class="col-sm-10">
-                    <input type="datetime-local" class="form-control" name="reservation_time" id="reservation_time"
-                    value="">
-                </div>
+
+            <div class="my-3">
+                <label for="reservation_date" class="form-label">予約日</label>
+                <input type="date" name="reservation_date" id="reservation_date"
+                    class="form-control @error('reservation_date') is-invalid @enderror "
+                    value="{{ old('reservation_date') }}" aria-describedby="validateReservationDate">
+                @error('reservation_date')
+                    <div id="validateReservationDate" class="invalid-feedback">
+                        {{ $message }}
+                    </div>
+                @enderror
             </div>
 
-            <div class="my-4 row">
+            <div class="my-3">
                 <label for="room_id" class="form-label">部屋種類</label>
-                <div class="col-sm-10">
-                    <select class="form-select" id="room_id" name="room_id">
-                        <option></option>
-                        <option value="1">スタジオA</option>
-                        <option value="2">スタジオB</option>
-                    </select>
-                </div>
+                <select id="room_id" name="room_id" class="form-control @error('room_id') is-invalid @enderror "
+                    aria-describedby="validateRoomId">
+                    <option></option>
+                    <option value="1">Aスタジオ</option>
+                    <option value="2">Bスタジオ</option>
+                </select>
+                @error('room_id')
+                    <div id="validateRoomId" class="invalid-feedback">
+                        {{ $message }}
+                    </div>
+                @enderror
             </div>
 
-            <div class="my-4 row">
+            <div class="my-3">
+                <label for="start_time" class="form-label">開始時間</label>
+                <select id="start_time" name="start_time" class="form-control @error('start_time') is-invalid @enderror "
+                    aria-describedby="validateStartTime">
+                    <option></option>
+                    <option value="10">10:00</option>
+                    <option value="11">11:00</option>
+                    <option value="12">12:00</option>
+                    <option value="13">13:00</option>
+                    <option value="14">14:00</option>
+                    <option value="15">15:00</option>
+                    <option value="16">16:00</option>
+                    <option value="17">17:00</option>
+                    <option value="18">18:00</option>
+                    <option value="19">19:00</option>
+                    <option value="20">20:00</option>
+                    <option value="21">21:00</option>
+                    <option value="22">22:00</option>
+                    <option value="23">23:00</option>
+                </select>
+                @error('start_time')
+                    <div id="validateStartTime" class="invalid-feedback">
+                        {{ $message }}
+                    </div>
+                @enderror
+            </div>
+
+            <div class="my-3">
                 <label for="utilization_time" class="form-label">利用時間</label>
-                <div class="col-sm-10">
-                    <select class="form-select" id="utilization_time" name="utilization_time">
-                        <option></option>
-                        <option value="1">1時間</option>
-                        <option value="2">2時間</option>
-                        <option value="3">3時間</option>
-                        <option value="4">4時間</option>
-                        <option value="5">5時間</option>
-                        <option value="6">6時間</option>
-                    </select>
-                </div>
+                <select id="utilization_time" name="utilization_time"
+                    class="form-control @error('utilization_time') is-invalid @enderror "
+                    aria-describedby="validateUtilizationTime">
+                    <option></option>
+                    <option value="1">1時間</option>
+                    <option value="2">2時間</option>
+                    <option value="3">3時間</option>
+                    <option value="4">4時間</option>
+                    <option value="5">5時間</option>
+                    <option value="6">6時間</option>
+                </select>
+                @error('utilization_time')
+                    <div id="validateUtilizationTime" class="invalid-feedback">
+                        {{ $message }}
+                    </div>
+                @enderror
             </div>
         </div>
-        <!-- 入力フォーム ここまで -->
+        <!-- 予約変更フォーム ここまで -->
 
         <!-- 送信ボタン -->
         <div class="my-2">

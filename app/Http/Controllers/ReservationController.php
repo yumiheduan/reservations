@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Reservation;
 use App\Member;
 use App\Room;
+use App\Http\Requests\ReservationRequest;
 
 class ReservationController extends Controller
 {
@@ -41,7 +42,7 @@ class ReservationController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ReservationRequest $request)
     {
         // データベースに登録する内容を連想配列にする。
         $reservation_data = array(
@@ -99,7 +100,7 @@ class ReservationController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Reservation $reservation)
+    public function update(ReservationRequest $request, Reservation $reservation)
     {
         $reservation->fill($request->all())->save();
         return redirect()->route('reservations.show', $reservation);
