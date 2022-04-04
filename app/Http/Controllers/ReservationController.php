@@ -21,7 +21,7 @@ class ReservationController extends Controller
             $request->member_id = $request->session()->get('id');
         }
         $member = Member::find($request->member_id);
-        $reservations = Reservation::where('member_id', $request->member_id)->get();
+        $reservations = Reservation::where('member_id', $request->member_id)->orderBy('reservation_time', 'asc')->get();
         return view('reservations.index', ['member' => $member, 'reservations' => $reservations]);
     }
 
