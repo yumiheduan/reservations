@@ -59,12 +59,12 @@ class ReservationController extends Controller
 
         // reservationテーブルへレコードのインサート
         // for ($i = 1; $i <= $num; $i++) {
-            $reservation = new Reservation();
-            $reservation->fill($reservation_data);
-            $reservation->reservation_time = $request->reservation_date . ' '. $request->start_time. ':00:00';
-            $reservation->save();
+        $reservation = new Reservation();
+        $reservation->fill($reservation_data);
+        $reservation->reservation_time = $request->reservation_date . ' '. $request->start_time. ':00:00';
+        $reservation->save();
 
-            // $request->start_time++;
+        // $request->start_time++;
         // }
 
         return redirect()->route('reservations.show', $reservation);
@@ -92,7 +92,7 @@ class ReservationController extends Controller
     public function edit(Reservation $reservation)
     {
         $member = Member::find($reservation->member_id);
-        $room = Room::where('id', $reservation->room_id)->first();
+        $room = Room::find($reservation->room_id);
         return view('reservations.edit', ['member' => $member, 'reservation' => $reservation, 'room' => $room]);
     }
 
