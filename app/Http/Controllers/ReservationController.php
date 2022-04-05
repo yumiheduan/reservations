@@ -7,6 +7,7 @@ use App\Reservation;
 use App\Member;
 use App\Room;
 use App\Http\Requests\ReservationRequest;
+use Carbon\Carbon;
 
 class ReservationController extends Controller
 {
@@ -20,8 +21,10 @@ class ReservationController extends Controller
         if (!($request->session()->get('id') == null)) {
             $request->member_id = $request->session()->get('id');
         }
+
+        $today=Carbon::today();
         $member = Member::find($request->member_id);
-        $reservations = Reservation::where('member_id', $request->member_id)->orderBy('reservation_time', 'asc')->get();
+        $reservations = Reservation::whereDate('reservation_time', '>=', $today)->where('member_id', $request->member_id)->orderBy('reservation_time', 'asc')->get();
         return view('reservations.index', ['member' => $member, 'reservations' => $reservations]);
     }
 
