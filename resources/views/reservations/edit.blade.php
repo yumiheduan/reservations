@@ -37,7 +37,7 @@
                 <label for="reservation_date" class="form-label">予約日</label>
                 <input type="date" name="reservation_date" id="reservation_date"
                     class="form-control @error('reservation_date') is-invalid @enderror "
-                    value="{{ old('reservation_date') }}" aria-describedby="validateReservationDate">
+                    value="{{ $date }}" aria-describedby="validateReservationDate">
                 @error('reservation_date')
                     <div id="validateReservationDate" class="invalid-feedback">
                         {{ $message }}
@@ -50,8 +50,8 @@
                 <select id="room_id" name="room_id" class="form-control @error('room_id') is-invalid @enderror "
                     aria-describedby="validateRoomId">
                     <option></option>
-                    <option value="1">Aスタジオ</option>
-                    <option value="2">Bスタジオ</option>
+                    <option value="1" {{ $reservation->room_id == 1? ' selected' : '' }}>Aスタジオ</option>
+                    <option value="2" {{ $reservation->room_id == 2? ' selected' : '' }}>Bスタジオ</option>
                 </select>
                 @error('room_id')
                     <div id="validateRoomId" class="invalid-feedback">
@@ -65,20 +65,19 @@
                 <select id="start_time" name="start_time" class="form-control @error('start_time') is-invalid @enderror "
                     aria-describedby="validateStartTime">
                     <option></option>
-                    <option value="10">10:00</option>
-                    <option value="11">11:00</option>
-                    <option value="12">12:00</option>
-                    <option value="13">13:00</option>
-                    <option value="14">14:00</option>
-                    <option value="15">15:00</option>
-                    <option value="16">16:00</option>
-                    <option value="17">17:00</option>
-                    <option value="18">18:00</option>
-                    <option value="19">19:00</option>
-                    <option value="20">20:00</option>
-                    <option value="21">21:00</option>
-                    <option value="22">22:00</option>
-                    <option value="23">23:00</option>
+                    <option value="10" {{ $time == 11? ' selected' : '' }}>11:00</option>
+                    <option value="12" {{ $time == 12? ' selected' : '' }}>12:00</option>
+                    <option value="13" {{ $time == 13? ' selected' : '' }}>13:00</option>
+                    <option value="14" {{ $time == 14? ' selected' : '' }}>14:00</option>
+                    <option value="15" {{ $time == 15? ' selected' : '' }}>15:00</option>
+                    <option value="16" {{ $time == 16? ' selected' : '' }}>16:00</option>
+                    <option value="17" {{ $time == 17? ' selected' : '' }}>17:00</option>
+                    <option value="18" {{ $time == 18? ' selected' : '' }}>18:00</option>
+                    <option value="19" {{ $time == 19? ' selected' : '' }}>19:00</option>
+                    <option value="20" {{ $time == 20? ' selected' : '' }}>20:00</option>
+                    <option value="21" {{ $time == 21? ' selected' : '' }}>21:00</option>
+                    <option value="22" {{ $time == 22? ' selected' : '' }}>22:00</option>
+                    <option value="23" {{ $time == 23? ' selected' : '' }}>23:00</option>
                 </select>
                 @error('start_time')
                     <div id="validateStartTime" class="invalid-feedback">
@@ -93,12 +92,12 @@
                     class="form-control @error('utilization_time') is-invalid @enderror "
                     aria-describedby="validateUtilizationTime">
                     <option></option>
-                    <option value="1">1時間</option>
-                    <option value="2">2時間</option>
-                    <option value="3">3時間</option>
-                    <option value="4">4時間</option>
-                    <option value="5">5時間</option>
-                    <option value="6">6時間</option>
+                    <option value="1" {{ $reservation->utilization_time == 1? ' selected' : '' }}>1時間</option>
+                    <option value="2" {{ $reservation->utilization_time == 2? ' selected' : '' }}>2時間</option>
+                    <option value="3" {{ $reservation->utilization_time == 3? ' selected' : '' }}>3時間</option>
+                    <option value="4" {{ $reservation->utilization_time == 4? ' selected' : '' }}>4時間</option>
+                    <option value="5" {{ $reservation->utilization_time == 5? ' selected' : '' }}>5時間</option>
+                    <option value="6" {{ $reservation->utilization_time == 6? ' selected' : '' }}>6時間</option>
                 </select>
                 @error('utilization_time')
                     <div id="validateUtilizationTime" class="invalid-feedback">

@@ -21,10 +21,12 @@ class ReservationController extends Controller
         if (!($request->session()->get('id') == null)) {
             $request->member_id = $request->session()->get('id');
         }
-
-        $today=Carbon::today();
         $member = Member::find($request->member_id);
+
+        // 本日の日付を取得し本日以降の一覧表示にする
+        $today=Carbon::today();
         $reservations = Reservation::whereDate('reservation_time', '>=', $today)->where('member_id', $request->member_id)->orderBy('reservation_time', 'asc')->get();
+
         return view('reservations.index', ['member' => $member, 'reservations' => $reservations]);
     }
 
@@ -91,9 +93,12 @@ class ReservationController extends Controller
      */
     public function edit(Reservation $reservation)
     {
+        $date = substr($reservation->reservation_time, 0, 10);
+        $time = substr($reservation->reservation_time, 11, 2);
+
         $member = Member::find($reservation->member_id);
         $room = Room::find($reservation->room_id);
-        return view('reservations.edit', ['member' => $member, 'reservation' => $reservation, 'room' => $room]);
+        return view('reservations.edit', ['date' => $date, 'time' => $time, 'member' => $member, 'reservation' => $reservation, 'room' => $room]);
     }
 
     /**
