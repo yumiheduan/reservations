@@ -110,6 +110,15 @@ class ReservationController extends Controller
      */
     public function update(ReservationRequest $request, Reservation $reservation)
     {
+        // データベースに登録する内容を連想配列にする。
+        $reservation_data = array(
+            'member_id' => $request->member_id,
+            'utilization_time' => $request->utilization_time,
+            'room_id' => $request->room_id,
+        );
+
+        // reservationテーブルへレコードのアップデート
+        $reservation->reservation_time = $request->reservation_date . ' '. $request->start_time. ':00:00';
         $reservation->fill($request->all())->save();
         return redirect()->route('reservations.show', $reservation);
     }
