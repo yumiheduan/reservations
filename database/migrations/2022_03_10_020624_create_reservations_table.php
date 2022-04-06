@@ -16,7 +16,7 @@ class CreateReservationsTable extends Migration
         Schema::create('reservations', function (Blueprint $table) {
             $table->bigIncrements('id')->comment('予約ID');
             $table->integer('member_id')->comment('会員ID');
-            $table->date('reservation_time')->comment('予約日時')->collation('utf8_unicode_ci');
+            $table->datetime('reservation_time')->comment('予約日時')->collation('utf8_unicode_ci');
             $table->char('utilization_time', 2)->comment('利用時間');
             $table->integer('room_id')->comment('部屋ID');
             $table->timestamps();
