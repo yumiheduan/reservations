@@ -24,8 +24,13 @@ class ReservationController extends Controller
         $member = Member::find($request->member_id);
 
         // 本日の日付を取得し本日以降の一覧表示にする
-        $today=Carbon::today();
-        $reservations = Reservation::whereDate('reservation_time', '>=', $today)->where('member_id', $request->member_id)->orderBy('reservation_time', 'asc')->get();
+        $today = Carbon::today();
+
+        $reservations = Reservation::whereDate('reservation_time', '>=', $today)
+            ->where('member_id', $request->member_id)
+            ->groupBy('created_at')
+            ->min('utilization_time')
+            ->orderBy('reservation_time', 'asc')->get();
 
         return view('reservations.index', ['member' => $member, 'reservations' => $reservations]);
     }
@@ -57,17 +62,17 @@ class ReservationController extends Controller
         );
 
         // 使用時間分をループするため$numに代入
-        // $num = $request->utilization_time;
+        $num = $request->utilization_time;
 
         // reservationテーブルへレコードのインサート
-        // for ($i = 1; $i <= $num; $i++) {
-        $reservation = new Reservation();
-        $reservation->fill($reservation_data);
-        $reservation->reservation_time = $request->reservation_date . ' '. $request->start_time. ':00:00';
-        $reservation->save();
+        for ($i = 1; $i <= $num; $i++) {
+            $reservation = new Reservation();
+            $reservation->fill($reservation_data);
+            $reservation->reservation_time = $request->reservation_date . ' ' . $request->start_time . ':00:00';
+            $reservation->save();
 
-        // $request->start_time++;
-        // }
+            $request->start_time++;
+        }
 
         return redirect()->route('reservations.show', $reservation);
     }
@@ -117,9 +122,17 @@ class ReservationController extends Controller
             'room_id' => $request->room_id,
         );
 
+        // 使用時間分をループするため$numに代入
+        $num = $request->utilization_time;
+
         // reservationテーブルへレコードのアップデート
-        $reservation->reservation_time = $request->reservation_date . ' '. $request->start_time. ':00:00';
-        $reservation->fill($request->all())->save();
+        for ($i = 1; $i <= $num; $i++) {
+            $reservation->fill($reservation_data);
+            $reservation->reservation_time = $request->reservation_date . ' ' . $request->start_time . ':00:00';
+            $reservation->save();
+
+            $request->start_time++;
+        }
         return redirect()->route('reservations.show', $reservation);
     }
 
@@ -135,28 +148,4 @@ class ReservationController extends Controller
         $request->member_id = $reservation->member_id;
         return redirect()->route('reservations.index')->with(['id' => $request->member_id]);
     }
-    /**
-     * Undocumented function
-     *
-     * @param [type] $year
-     * @param [type] $month
-     * @return void
-     */
-    // public function getCalendarDates($year, $month)
-    // {
-    //     $dateStr = sprintf('%04d-%02d-01', $year, $month);
-    //     $date = new Carbon($dateStr);
-    //     // カレンダーを四角形にするため、前月となる左上の隙間用のデータを入れるためずらす
-    //     $date->subDay($date->dayOfWeek);
-    //     // 同上。右下の隙間のための計算。
-    //     $count = 31 + $date->dayOfWeek;
-    //     $count = ceil($count / 7) * 7;
-    //     $dates = [];
-
-    //     for ($i = 0; $i < $count; $i++, $date->addDay()) {
-    //         // copyしないと全部同じオブジェクトを入れてしまうことになる
-    //         $dates[] = $date->copy();
-    //     }
-    //     return view('reservations.index', $dates);
-    // }
 }
