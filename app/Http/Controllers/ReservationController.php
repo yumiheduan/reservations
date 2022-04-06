@@ -29,7 +29,7 @@ class ReservationController extends Controller
         $reservations = Reservation::whereDate('reservation_time', '>=', $today)
             ->where('member_id', $request->member_id)
             ->groupBy('created_at')
-            ->min('utilization_time')
+            ->having(min('utilization_time'))
             ->orderBy('reservation_time', 'asc')->get();
 
         return view('reservations.index', ['member' => $member, 'reservations' => $reservations]);
