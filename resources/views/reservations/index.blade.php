@@ -18,7 +18,8 @@
                 aria-label="会員検索">
             <button type="submit" class="btn btn-outline-light flex-shrink-0">検索</button>
         </form>
-    </div><!-- /.navbar-collapse -->
+    </div>
+    <!-- /.navbar-collapse -->
 
 @endsection
 
@@ -30,7 +31,7 @@
 
     <!-- 予約がない場合のメッセージ表示 -->
     <div class="card-body text-success">
-        @if (count($reservations) == 0)
+        @if ($reservations->isEmpty())
             <div class="table-responsive">
                 <table class="table table-success">
                     <tbody>
@@ -56,48 +57,49 @@
                 </div>
             </div>
             <!-- 送信ボタン ここまで -->
-    </div>
 
+            <!-- 予約情報確認テーブル -->
+        @else
+            <div class="table">
+                <table class="table table-striped table-bordered">
+                    <thead>
+                        <tr>
+                            <th>予約日時</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($reservations as $reservation)
+                            <tr>
+                                <td>{{ $reservation['reservation_time']->format('Y年m月d日 H時') }}</td>
+                                <td>
+                                    <a href="{{ route('reservations.show', $reservation) }}"
+                                        class="btn btn-primary">予約詳細</a>
+                                </td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
 
-    <!-- 予約情報確認テーブル -->
-@else
-    <div class="table">
-        <table class="table table-striped table-bordered">
-            <thead>
-                <tr>
-                    <th>予約日時</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach ($reservations as $reservation)
-                    <tr>
-                        <td>{{ $reservation['reservation_time']->format('Y年m月d日 H時') }}</td>
-                        <td>
-                            <a href="{{ route('reservations.show', $reservation) }}" class="btn btn-primary">予約詳細</a>
-                        </td>
-                    </tr>
-                @endforeach
-            </tbody>
-        </table>
-
-        <!-- 送信ボタン -->
-        <div class="row my-2">
-            <div class="my-2">
-                <div class="btn-toolbar">
-                    <div class="btn-group">
-                        <form action="{{ route('reservations.create') }}" method="get" class="form-inline">
-                            @csrf
-                            <input type="hidden" name="member_id" value="{{ $member->id }}">
-                            <button class="btn btn-success mb-3">予約入力</button>
-                        </form>
-                        <a href="{{ route('members.show', $member) }}" class="btn btn-outline-secondary mb-3">会員詳細</a>
+                <!-- 送信ボタン -->
+                <div class="row my-2">
+                    <div class="my-2">
+                        <div class="btn-toolbar">
+                            <div class="btn-group">
+                                <form action="{{ route('reservations.create') }}" method="get" class="form-inline">
+                                    @csrf
+                                    <input type="hidden" name="member_id" value="{{ $member->id }}">
+                                    <button class="btn btn-success mb-3">予約入力</button>
+                                </form>
+                                <a href="{{ route('members.show', $member) }}"
+                                    class="btn btn-outline-secondary mb-3">会員詳細</a>
+                            </div>
+                        </div>
                     </div>
                 </div>
+                <!-- 送信ボタン ここまで -->
             </div>
-        </div>
-        <!-- 送信ボタン ここまで -->
+            <!-- 予約情報確認テーブル ここまで -->
+        @endif
     </div>
-    <!-- 予約情報確認テーブル ここまで -->
-    @endif
 
 @endsection

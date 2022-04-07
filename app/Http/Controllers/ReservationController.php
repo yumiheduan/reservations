@@ -21,13 +21,14 @@ class ReservationController extends Controller
         if (!($request->session()->get('id') == null)) {
             $request->member_id = $request->session()->get('id');
         }
+
         $member = Member::find($request->member_id);
 
         // 本日の日付を取得し本日以降の一覧表示にする
         $today = Carbon::today();
-
         $reservations = Reservation::whereDate('reservation_time', '>=', $today)
-            ->where('member_id', $request->member_id)->orderBy('reservation_time', 'asc')->get();
+            ->where('member_id', $request->member_id)
+            ->orderBy('reservation_time', 'asc')->get();
 
         return view('reservations.index', ['member' => $member, 'reservations' => $reservations]);
     }
