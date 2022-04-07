@@ -50,7 +50,7 @@ class ReservationController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(ReservationRequest $request)
+    public function store(Reservation $reservation,ReservationRequest $request)
     {
         // データベースに登録する内容を連想配列にする。
         $reservation_data = array(
@@ -59,18 +59,13 @@ class ReservationController extends Controller
             'room_id' => $request->room_id,
         );
 
-        // 使用時間分をループするため$numに代入
-        // $num = $request->utilization_time;
+        dd($reservation);
+        $this->check($reservation->reservation_date, $request->start_time, $reservation->utilization_time, $request->utilization_time);
 
-        // reservationテーブルへレコードのインサート
-        // for ($i = 1; $i <= $num; $i++) {
-            $reservation = new Reservation();
-            $reservation->fill($reservation_data);
-            $reservation->reservation_time = $request->reservation_date . ' ' . $request->start_time . ':00:00';
-            $reservation->save();
-
-            // $request->start_time++;
-        // }
+        $reservation = new Reservation();
+        $reservation->fill($reservation_data);
+        $reservation->reservation_time = $request->reservation_date . ' ' . $request->start_time . ':00:00';
+        $reservation->save();
 
         return redirect()->route('reservations.show', $reservation);
     }
@@ -121,16 +116,16 @@ class ReservationController extends Controller
         );
 
         // 使用時間分をループするため$numに代入
-        $num = $request->utilization_time;
+        // $num = $request->utilization_time;
 
         // reservationテーブルへレコードのアップデート
-        for ($i = 1; $i <= $num; $i++) {
-            $reservation->fill($reservation_data);
-            $reservation->reservation_time = $request->reservation_date . ' ' . $request->start_time . ':00:00';
-            $reservation->save();
+        // for ($i = 1; $i <= $num; $i++) {
+        $reservation->fill($reservation_data);
+        $reservation->reservation_time = $request->reservation_date . ' ' . $request->start_time . ':00:00';
+        $reservation->save();
 
-            $request->start_time++;
-        }
+        // $request->start_time++;
+        // }
         return redirect()->route('reservations.show', $reservation);
     }
 
@@ -145,5 +140,45 @@ class ReservationController extends Controller
         $reservation->delete();
         $request->member_id = $reservation->member_id;
         return redirect()->route('reservations.index')->with(['id' => $request->member_id]);
+    }
+
+    /*
+ * @param $reservations　DBに登録されているデータの予約開始時間
+ * @param $input_time 入力データの予約開始時間
+ * @param $reservations_hour　DBに登録されているデータの利用時間　DBでは4などを入力する
+ * @param $input_time_hour 入力データの利用時間
+ *
+ * @var $start_time DBに登録されている予約時間から時間のみ切り取った部分
+ * @var $times DBに登録されている予約の予約時間を1時間ごとに分割した配列
+ * @var $input_start_time 入力データの予約時間から時間のみ切り取った部分
+ * @var $times2 入力データの予約時間を1時間ごとに分割した配列
+ * @var $check 予約時間の重複をまとめた配列
+ */
+    public function check($reservations, $input_time, $reservations_hour, $input_time_hour)
+    {
+
+        $times = [];
+        $times2 = [];
+
+        dd($reservations);
+        $start_time = substr($reservations, 11, 2);
+        array_push($times, $start_time);
+        for ($i=1;$i<=$reservations_hour;$i++) {
+            array_push($times, $start_time + $i);
+        }
+
+        //$input_start_time = substr($input_time, 11, 2);
+        array_push($times2, $input_time);
+        for ($j=1;$j<=$input_time_hour;$j++) {
+            //dd($input_time);
+            array_push($times2,$input_time + $j);
+        }
+        $check = array_intersect($times,$times2);
+
+        dd($times,$times2);
+        dd($check);
+        if (!empty($check)) {
+            back();
+        }
     }
 }
