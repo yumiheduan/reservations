@@ -27,10 +27,7 @@ class ReservationController extends Controller
         $today = Carbon::today();
 
         $reservations = Reservation::whereDate('reservation_time', '>=', $today)
-            ->where('member_id', $request->member_id)
-            ->groupBy('created_at')
-            ->min('reservation_time')
-            ->orderBy('reservation_time', 'asc')->get();
+            ->where('member_id', $request->member_id)->orderBy('reservation_time', 'asc')->get();
 
         return view('reservations.index', ['member' => $member, 'reservations' => $reservations]);
     }
@@ -62,17 +59,17 @@ class ReservationController extends Controller
         );
 
         // 使用時間分をループするため$numに代入
-        $num = $request->utilization_time;
+        // $num = $request->utilization_time;
 
         // reservationテーブルへレコードのインサート
-        for ($i = 1; $i <= $num; $i++) {
+        // for ($i = 1; $i <= $num; $i++) {
             $reservation = new Reservation();
             $reservation->fill($reservation_data);
             $reservation->reservation_time = $request->reservation_date . ' ' . $request->start_time . ':00:00';
             $reservation->save();
 
-            $request->start_time++;
-        }
+            // $request->start_time++;
+        // }
 
         return redirect()->route('reservations.show', $reservation);
     }
