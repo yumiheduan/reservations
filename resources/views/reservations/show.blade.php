@@ -31,12 +31,12 @@
     <div class="table">
         <table class="table table-striped table-bordered">
             <tr>
-                <th>予約日時</th>
-                <td>{{ $reservation['reservation_time']->format('Y年m月d日 H時') }}</td>
+                <th>予約日</th>
+                <td>{{ $reservation['reservation_date']->format('Y年m月d日') }}</td>
             </tr>
             <tr>
                 <th>利用時間</th>
-                <td>{{ $reservation->utilization_time }}時間</td>
+                <td> </td>
             </tr>
             <tr>
                 <th>部屋情報</th>
@@ -53,9 +53,6 @@
                         <input type="hidden" name="member_id" value="{{ $member->id }}">
                         <button class="btn btn-outline-success mb-3">予約一覧</button>
                     </form>
-
-                    <a href="{{ route('reservations.edit', $reservation) }}" class="btn btn-secondary mb-3">予約変更</a>
-
                     <form action="{{ route('reservations.destroy', $reservation) }}" method="post" class="form-inline">
                         @method('DELETE')
                         @csrf

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Reservation;
 use App\Member;
 use App\Room;
+use App\Time;
 use App\Http\Requests\ReservationRequest;
 use Carbon\Carbon;
 
@@ -26,9 +27,9 @@ class ReservationController extends Controller
 
         // 本日の日付を取得し本日以降の一覧表示にする
         $today = Carbon::today();
-        $reservations = Reservation::whereDate('reservation_time', '>=', $today)
+        $reservations = Reservation::whereDate('reservation_date', '>=', $today)
             ->where('member_id', $request->member_id)
-            ->orderBy('reservation_time', 'asc')->get();
+            ->orderBy('reservation_date', 'asc')->get();
 
         return view('reservations.index', ['member' => $member, 'reservations' => $reservations]);
     }
@@ -50,24 +51,36 @@ class ReservationController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Reservation $reservation,ReservationRequest $request)
+    public function store(Reservation $reservation, Time $time, ReservationRequest $request)
     {
-        // データベースに登録する内容を連想配列にする。
-        $reservation_data = array(
-            'member_id' => $request->member_id,
-            'utilization_time' => $request->utilization_time,
-            'room_id' => $request->room_id,
-        );
-
-        dd($reservation);
-        $this->check($reservation->reservation_date, $request->start_time, $reservation->utilization_time, $request->utilization_time);
-
+        // reservationsテーブルへレコードのインサート
         $reservation = new Reservation();
-        $reservation->fill($reservation_data);
-        $reservation->reservation_time = $request->reservation_date . ' ' . $request->start_time . ':00:00';
+        $reservation->fill($request->all());
         $reservation->save();
 
-        return redirect()->route('reservations.show', $reservation);
+        // timeテーブルに登録する予約IDと統一する為、最後に登録されたIDを返す 
+        $last_insert_id = $reservation->id;
+
+        // timesテーブルへレコードのインサート
+        // データベースに登録する内容を連想配列にする。
+        $time_data = array(
+            'reservation_id' => $last_insert_id,
+            'member_id' => $request->member_id,
+            'reservation_date' => $request->reservation_date,
+            'start_time' => $request->start_time,
+            'room_id' => $request->room_id,
+        );
+        // 使用時間分をループする
+        $num = $request->utilization_time;
+
+        for ($i = 1; $i <= $num; $i++) {
+            $time = new Time();
+            $time->fill($time_data);
+            $time->save();
+            $request->start_time++;
+        }
+
+        return redirect()->route('reservations.show', $reservation)->with(['id' => $request->member_id]);;
     }
 
     /**
@@ -76,11 +89,12 @@ class ReservationController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Reservation $reservation)
+    public function show(Reservation $reservation, Time $time)
     {
         $member = Member::find($reservation->member_id);
         $room = Room::find($reservation->room_id);
-        return view('reservations.show', ['member' => $member, 'reservation' => $reservation, 'room' => $room]);
+        $time = Time::find($reservation->id);
+        return view('reservations.show', ['member' => $member, 'reservation' => $reservation, 'room' => $room, 'time' => $time]);
     }
 
     /**
@@ -91,12 +105,7 @@ class ReservationController extends Controller
      */
     public function edit(Reservation $reservation)
     {
-        $date = substr($reservation->reservation_time, 0, 10);
-        $time = substr($reservation->reservation_time, 11, 2);
-
-        $member = Member::find($reservation->member_id);
-        $room = Room::find($reservation->room_id);
-        return view('reservations.edit', ['date' => $date, 'time' => $time, 'member' => $member, 'reservation' => $reservation, 'room' => $room]);
+        // 
     }
 
     /**
@@ -108,25 +117,7 @@ class ReservationController extends Controller
      */
     public function update(ReservationRequest $request, Reservation $reservation)
     {
-        // データベースに登録する内容を連想配列にする。
-        $reservation_data = array(
-            'member_id' => $request->member_id,
-            'utilization_time' => $request->utilization_time,
-            'room_id' => $request->room_id,
-        );
-
-        // 使用時間分をループするため$numに代入
-        // $num = $request->utilization_time;
-
-        // reservationテーブルへレコードのアップデート
-        // for ($i = 1; $i <= $num; $i++) {
-        $reservation->fill($reservation_data);
-        $reservation->reservation_time = $request->reservation_date . ' ' . $request->start_time . ':00:00';
-        $reservation->save();
-
-        // $request->start_time++;
-        // }
-        return redirect()->route('reservations.show', $reservation);
+        //
     }
 
     /**
@@ -140,45 +131,5 @@ class ReservationController extends Controller
         $reservation->delete();
         $request->member_id = $reservation->member_id;
         return redirect()->route('reservations.index')->with(['id' => $request->member_id]);
-    }
-
-    /*
- * @param $reservations　DBに登録されているデータの予約開始時間
- * @param $input_time 入力データの予約開始時間
- * @param $reservations_hour　DBに登録されているデータの利用時間　DBでは4などを入力する
- * @param $input_time_hour 入力データの利用時間
- *
- * @var $start_time DBに登録されている予約時間から時間のみ切り取った部分
- * @var $times DBに登録されている予約の予約時間を1時間ごとに分割した配列
- * @var $input_start_time 入力データの予約時間から時間のみ切り取った部分
- * @var $times2 入力データの予約時間を1時間ごとに分割した配列
- * @var $check 予約時間の重複をまとめた配列
- */
-    public function check($reservations, $input_time, $reservations_hour, $input_time_hour)
-    {
-
-        $times = [];
-        $times2 = [];
-
-        dd($reservations);
-        $start_time = substr($reservations, 11, 2);
-        array_push($times, $start_time);
-        for ($i=1;$i<=$reservations_hour;$i++) {
-            array_push($times, $start_time + $i);
-        }
-
-        //$input_start_time = substr($input_time, 11, 2);
-        array_push($times2, $input_time);
-        for ($j=1;$j<=$input_time_hour;$j++) {
-            //dd($input_time);
-            array_push($times2,$input_time + $j);
-        }
-        $check = array_intersect($times,$times2);
-
-        dd($times,$times2);
-        dd($check);
-        if (!empty($check)) {
-            back();
-        }
     }
 }

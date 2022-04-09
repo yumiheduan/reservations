@@ -70,7 +70,7 @@
                     <tbody>
                         @foreach ($reservations as $reservation)
                             <tr>
-                                <td>{{ $reservation['reservation_time']->format('Y年m月d日 H時') }}</td>
+                                <td>{{ $reservation['reservation_date']->format('Y年m月d日') }}</td>
                                 <td>
                                     <a href="{{ route('reservations.show', $reservation) }}"
                                         class="btn btn-primary">予約詳細</a>

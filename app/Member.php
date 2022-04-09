@@ -13,6 +13,11 @@ class Member extends Model
     {
         return $this->hasMany("App\Reservation");
     }
+    
+    public function time()
+    {
+        return $this->hasMany("App\Time");
+    }
 
     protected $guarded = ['id',];
     
