@@ -28,7 +28,7 @@ class ReservationRequest extends FormRequest
             'reservation_date' => 'required|date|after_or_equal:today',
             'room_id' => 'required|integer',
             'start_time' => 'required|integer',
-            'utilization_time' => 'required|integer',
+            'use_time' => 'required|integer',
 
         ];
     }
@@ -44,7 +44,7 @@ class ReservationRequest extends FormRequest
             'reservation_date.after_or_equal' => '予約日は本日以降の日付である必要があります。',
             'room_id.required' => '部屋種類を選択してください。',
             'start_time.required' => '開始時間を選択してください。',
-            'utilization_time.required' => '利用時間を選択してください。',
+            'use_time.required' => '利用時間を選択してください。',
 
         ];
     }

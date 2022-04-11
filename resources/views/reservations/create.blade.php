@@ -94,20 +94,20 @@
             </div>
 
             <div class="my-3">
-                <label for="utilization_time" class="form-label">利用時間</label>
-                <select id="utilization_time" name="utilization_time"
-                    class="form-control @error('utilization_time') is-invalid @enderror "
-                    aria-describedby="validateUtilizationTime">
+                <label for="use_time" class="form-label">利用時間</label>
+                <select id="use_time" name="use_time"
+                    class="form-control @error('use_time') is-invalid @enderror "
+                    aria-describedby="validateUseTime">
                     <option></option>
-                    <option value="1" {{ old('utilization_time') == 1 ? ' selected' : '' }}>1時間</option>
-                    <option value="2" {{ old('utilization_time') == 2 ? ' selected' : '' }}>2時間</option>
-                    <option value="3" {{ old('utilization_time') == 3 ? ' selected' : '' }}>3時間</option>
-                    <option value="4" {{ old('utilization_time') == 4 ? ' selected' : '' }}>4時間</option>
-                    <option value="5" {{ old('utilization_time') == 5 ? ' selected' : '' }}>5時間</option>
-                    <option value="6" {{ old('utilization_time') == 6 ? ' selected' : '' }}>6時間</option>
+                    <option value="1" {{ old('use_time') == 1 ? ' selected' : '' }}>1時間</option>
+                    <option value="2" {{ old('use_time') == 2 ? ' selected' : '' }}>2時間</option>
+                    <option value="3" {{ old('use_time') == 3 ? ' selected' : '' }}>3時間</option>
+                    <option value="4" {{ old('use_time') == 4 ? ' selected' : '' }}>4時間</option>
+                    <option value="5" {{ old('use_time') == 5 ? ' selected' : '' }}>5時間</option>
+                    <option value="6" {{ old('use_time') == 6 ? ' selected' : '' }}>6時間</option>
                 </select>
-                @error('utilization_time')
-                    <div id="validateUtilizationTime" class="invalid-feedback">
+                @error('use_time')
+                    <div id="validateUseTime" class="invalid-feedback">
                         {{ $message }}
                     </div>
                 @enderror
