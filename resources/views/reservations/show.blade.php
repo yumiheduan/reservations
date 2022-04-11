@@ -36,7 +36,7 @@
             </tr>
             <tr>
                 <th>利用時間</th>
-                <td>{{ $start_time }}時から{{ $end_time }}時まで</td>
+                <td>{{ $start_time }}時から{{ $end_time }}時まで  {{ $time }}時間</td>
             </tr>
             <tr>
                 <th>部屋情報</th>

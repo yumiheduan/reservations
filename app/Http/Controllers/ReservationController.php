@@ -91,13 +91,14 @@ class ReservationController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Reservation $reservation, Time $time)
+    public function show(Reservation $reservation)
     {
         $member = Member::find($reservation->member_id);
         $room = Room::find($reservation->room_id);
 
-        $start_time = Time::min('start_time');
-        $end_time = Time::max('start_time') +1;
+        $start_time = Time::where('reservation_id', $reservation->id)->min('start_time');
+        $end_time = Time::where('reservation_id', $reservation->id)->max('start_time')+1;
+        $time = $end_time - $start_time;
 
         return view(
             'reservations.show',
@@ -107,6 +108,7 @@ class ReservationController extends Controller
             'room' => $room,
             'start_time' =>$start_time,
             'end_time' => $end_time,
+            'time' => $time,
         ]
         );
     }
@@ -143,6 +145,7 @@ class ReservationController extends Controller
     public function destroy(Reservation $reservation, Request $request)
     {
         $reservation->delete();
+
         $request->member_id = $reservation->member_id;
         return redirect()->route('reservations.index')->with(['id' => $request->member_id]);
     }
