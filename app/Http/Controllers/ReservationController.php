@@ -96,6 +96,7 @@ class ReservationController extends Controller
         $member = Member::find($reservation->member_id);
         $room = Room::find($reservation->room_id);
 
+        // 利用時間の表示
         $start_time = Time::where('reservation_id', $reservation->id)->min('start_time');
         $end_time = Time::where('reservation_id', $reservation->id)->max('start_time')+1;
         $time = $end_time - $start_time;
@@ -145,7 +146,6 @@ class ReservationController extends Controller
     public function destroy(Reservation $reservation, Request $request)
     {
         $reservation->delete();
-
         $request->member_id = $reservation->member_id;
         return redirect()->route('reservations.index')->with(['id' => $request->member_id]);
     }

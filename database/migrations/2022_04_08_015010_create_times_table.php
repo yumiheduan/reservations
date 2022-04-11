@@ -18,7 +18,7 @@ class CreateTimesTable extends Migration
             $table->integer('reservation_id')->comment('予約ID');
             $table->integer('member_id')->comment('会員ID');
             $table->date('reservation_date')->comment('予約日')->collation('utf8_unicode_ci');
-            $table->tinyint('start_time', 2)->comment('開始時間')->collation('utf8_unicode_ci');
+            $table->smallInteger('start_time')->comment('開始時間')->collation('utf8_unicode_ci');
             $table->integer('room_id')->comment('部屋ID');
             $table->timestamps();
         });
