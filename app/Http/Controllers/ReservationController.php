@@ -58,29 +58,31 @@ class ReservationController extends Controller
         $reservation->fill($request->all());
         $reservation->save();
 
-        // timeテーブルに登録する予約IDと統一する為、最後に登録されたIDを返す 
+        // timeテーブルに登録する予約IDと統一する為、最後に登録されたIDを返す
         $last_insert_id = $reservation->id;
 
-        // timesテーブルへレコードのインサート
-        // データベースに登録する内容を連想配列にする。
-        $time_data = array(
-            'reservation_id' => $last_insert_id,
-            'member_id' => $request->member_id,
-            'reservation_date' => $request->reservation_date,
-            'start_time' => $request->start_time,
-            'room_id' => $request->room_id,
-        );
-        // 使用時間分をループする
+        // 使用時間分をループするため$numに代入
         $num = $request->utilization_time;
 
+        // time_tableテーブルへレコードのインサート
         for ($i = 1; $i <= $num; $i++) {
+
+        // timesテーブルに登録する内容を連想配列にする。
+            $time_data = array(
+                'reservation_id' => $last_insert_id,
+                'member_id' => $request->member_id,
+                'reservation_date' => $request->reservation_date,
+                'start_time' => $request->start_time,
+                'room_id' => $request->room_id,
+            );
+
             $time = new Time();
             $time->fill($time_data);
             $time->save();
             $request->start_time++;
         }
 
-        return redirect()->route('reservations.show', $reservation)->with(['id' => $request->member_id]);;
+        return redirect()->route('reservations.show', $reservation)->with(['id' => $request->member_id]);
     }
 
     /**
@@ -93,8 +95,20 @@ class ReservationController extends Controller
     {
         $member = Member::find($reservation->member_id);
         $room = Room::find($reservation->room_id);
-        $time = Time::find($reservation->id);
-        return view('reservations.show', ['member' => $member, 'reservation' => $reservation, 'room' => $room, 'time' => $time]);
+
+        $start_time = Time::min('start_time');
+        $end_time = Time::max('start_time') +1;
+
+        return view(
+            'reservations.show',
+            [
+            'member' => $member,
+            'reservation' => $reservation,
+            'room' => $room,
+            'start_time' =>$start_time,
+            'end_time' => $end_time,
+        ]
+        );
     }
 
     /**
@@ -105,7 +119,7 @@ class ReservationController extends Controller
      */
     public function edit(Reservation $reservation)
     {
-        // 
+        //
     }
 
     /**
