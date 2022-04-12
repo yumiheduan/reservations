@@ -56,9 +56,11 @@
                     <form action="{{ route('reservations.destroy', $reservation) }}" method="post" class="form-inline">
                         @method('DELETE')
                         @csrf
-                        <button type="submit" class="btn btn-outline-danger mb-3"
+                        <button type="submit" class="btn btn-danger mb-3"
                             onclick="return confirm('本当に予約を削除しますか?');">予約削除</button>
                     </form>
+                    <a href="{{ route('members.show', $member) }}" class="btn btn-outline-secondary mb-3">会員詳細</a>
+                    <a href="{{ route('members.index') }}" class="btn btn-secondary mb-3">処理終了</a>
                 </div>
             </div>
         </div>
