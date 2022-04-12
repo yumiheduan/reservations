@@ -16,40 +16,26 @@ class TimeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request, Time $times, Member $member)
+    public function index(Time $time)
     {
         // 本日の日付を取得し一覧表示にする
         $day = Carbon::today();
 
         for ($i = 10; $i <= 23; $i++) {
-            $table_a = Time::whereDate('reservation_date', '=', $day)
+            $table_a[] = Time::with('member')->whereDate('reservation_date', '=', $day)
                 ->where('start_time', '=', $i)
                 ->where('room_id', '=', 1)
-                ->get();
-
-                // if (isset($table_a)) {
-                    // $member_a = Member::where('member_id', '=', $table_a->member_id)->get();
-                // }
-                if (!is_null($table_a)) {
-                    break;
-                }
+                ->first();
             }
-            dd($table_a->member_id);
 
-        //dd($member_a);
-        
         for ($i = 10; $i <= 23; $i++) {
-            $table_b = Time::whereDate('reservation_date', '=', '2022-04-09')
+            $table_b[] = Time::with('member')->whereDate('reservation_date', '=', $day)
                 ->where('start_time', '=', $i)
                 ->where('room_id', '=', 2)
-                ->get();
-        }
+                ->first();
+            }
 
-        if (isset($table_b)) {
-            $member_b = Member::find($times->member_id);
-        }
-
-        return view('times.index', ['day' => $day, 'times' => $times, 'member_a' => $member_a, 'member_b' => $member_b]);
+        return view('times.index', ['day' => $day, 'table_a' => $table_a, 'table_b' => $table_b]);
     }
 
     /**
