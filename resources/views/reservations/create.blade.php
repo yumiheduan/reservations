@@ -29,7 +29,13 @@
 
 @section('content')
     <h1>予約登録</h1>
-
+    {{-- @if (count($errors) > 0)
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    @endif --}}
     <!-- 入力フォーム -->
     <form action="{{ route('reservations.store') }}" method="post">
         @csrf
@@ -95,8 +101,7 @@
 
             <div class="my-3">
                 <label for="use_time" class="form-label">利用時間</label>
-                <select id="use_time" name="use_time"
-                    class="form-control @error('use_time') is-invalid @enderror "
+                <select id="use_time" name="use_time" class="form-control @error('use_time') is-invalid @enderror "
                     aria-describedby="validateUseTime">
                     <option></option>
                     <option value="1" {{ old('use_time') == 1 ? ' selected' : '' }}>1時間</option>
