@@ -57,7 +57,7 @@
                             <button class="btn btn-outline-success mb-3">予約一覧</button>
                         </form>
 
-                        <a href="{{ route('members.edit', $member) }}" class="btn btn-secondary mb-3">情報変更</a>
+                        <a href="{{ route('members.edit', $member) }}" class="btn btn-warning mb-3">情報変更</a>
 
                         <form action="{{ route('members.destroy', $member) }}" method="post" class="form-inline">
                             @method('DELETE')
@@ -65,7 +65,7 @@
                             <button type="submit" class="btn btn-outline-danger mb-3"
                                 onclick="return confirm('本当に会員情報を削除しますか?');">情報削除</button>
                         </form>
-                        <a href="{{ route('members.index') }}" class="btn btn-outline-secondary mb-3">処理終了</a>
+                        <a href="{{ route('members.index') }}" class="btn btn-secondary mb-3">処理終了</a>
                     </div>
                 </div>
             </div>

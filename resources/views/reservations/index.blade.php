@@ -90,8 +90,8 @@
                                     <input type="hidden" name="member_id" value="{{ $member->id }}">
                                     <button class="btn btn-success mb-3">予約入力</button>
                                 </form>
-                                <a href="{{ route('members.show', $member) }}"
-                                    class="btn btn-outline-secondary mb-3">会員詳細</a>
+                                <a href="{{ route('members.show', $member) }}" class="btn btn-outline-secondary mb-3">会員詳細</a>
+                                <a href="{{ route('members.index') }}" class="btn btn-secondary mb-3">処理終了</a>
                             </div>
                         </div>
                     </div>

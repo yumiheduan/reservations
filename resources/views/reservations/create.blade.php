@@ -126,6 +126,7 @@
                 <div class="btn-group">
                     <button type="submit" class="btn btn-success mb-3" name="btn_confirm">予約登録</button>
                     <a href="{{ route('members.show', $member) }}" class="btn btn-outline-secondary mb-3">会員情報</a>
+                    <a href="{{ route('members.index') }}" class="btn btn-secondary mb-3">処理終了</a>
                 </div>
             </div>
         </div>
