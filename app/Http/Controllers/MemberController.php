@@ -17,7 +17,9 @@ class MemberController extends Controller
     public function index(Request $request)
     {
         $members = Member::where("kana_name", "like", $request->search. "%")->paginate(5);
-        return view('members.index', ['members' => $members]);
+
+        $search = $request->search;
+        return view('members.index', ['members' => $members, 'search' => $search]);
     }
 
     /**

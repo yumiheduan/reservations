@@ -19,6 +19,7 @@
                 </tr>
             </thead>
             <tbody>
+
                 @foreach ($members as $member)
                     <tr>
                         <td>{{ $member->kana_name }}</td>
@@ -31,7 +32,7 @@
                 @endforeach
             </tbody>
         </table>
-        {{ $members->links() }}
+        {{ $members->appends(['search' => $search])->links() }}
     </div>
     <!-- メンバー情報確認テーブル ここまで -->
 
