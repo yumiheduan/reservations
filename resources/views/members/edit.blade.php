@@ -55,6 +55,7 @@
             <div class="my-2">
                 <button class="btn btn-primary mb-3" type="submit">情報変更</button>
                 <a href="{{ route('members.show', $member) }}" class="btn btn-outline-secondary mb-3">会員情報</a>
+                <a href="{{ route('times.index') }}" class="btn btn-secondary mb-3">処理終了</a>
             </div>
         </div>
     </form>
