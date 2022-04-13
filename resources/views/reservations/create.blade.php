@@ -10,22 +10,6 @@
 @section('title', 'reservations_create')
 
 @section('navbar')
-    <div class="collapse navbar-collapse" id="Navbar">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-            <li class="nav-item">
-                <a class="nav-link" aria-current="page" href="{{ route('times.index') }}">予約状況</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link active" href="">会員情報</a>
-            </li>
-        </ul>
-        <form class="d-flex" action="" method="">
-            <input type="search" class="form-control me-sm-2" name="search" id="search" placeholder="会員検索" aria-label="会員検索">
-            <button type="submit" class="btn btn-outline-light flex-shrink-0">検索</button>
-        </form>
-    </div><!-- /.navbar-collapse -->
-
-@endsection
 
 @section('content')
     <h1>予約登録</h1>
