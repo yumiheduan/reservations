@@ -50,7 +50,7 @@ class ReservationRequest extends FormRequest
         $validate_time = function ($attribute, $value, $fail) {
 
             // 入力されたデータが24時を超えていたら失敗にする。
-            if ($this->start_time + $this->use_time >= 24)
+            if ($this->start_time + $this->use_time -1 >= 24)
             {
                 $fail('営業時間は24時までです。'); // エラーメッセージ
             }
