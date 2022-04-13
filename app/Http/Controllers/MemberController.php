@@ -18,7 +18,9 @@ class MemberController extends Controller
     {
         $members = Member::where("kana_name", "like", $request->search. "%")->paginate(5);
 
+        // ペジネーションリンク追加のために変数に代入
         $search = $request->search;
+
         return view('members.index', ['members' => $members, 'search' => $search]);
     }
 
