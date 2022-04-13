@@ -2,8 +2,8 @@
 
 namespace App\Http\Requests;
 
-use DateTime;
 use Illuminate\Foundation\Http\FormRequest;
+use App\Time;
 
 class ReservationRequest extends FormRequest
 {
@@ -24,11 +24,29 @@ class ReservationRequest extends FormRequest
      */
     public function rules()
     {
+        /**
+         * 予約重複の防止バリデーション
+         *   $attribute: 検証中の属性名
+         *   $value    : 検証中の属性の値
+         *   $fail     : 失敗時に呼び出すメソッド?
+         **/
+        $validate_func = function ($attribute, $value, $fail) {
+
+            // 入力されたデータがtimeテーブルに存在したら失敗にする。
+            if (Time::whereDate('reservation_date', '=', $this->reservation_date)
+                ->where('room_id', '=', $this->room_id)
+                ->where('start_time', '>=', $this->start_time)
+                ->where('start_time', '<=', $this->start_time + $this->use_time)->exists()
+            ){
+                $fail('その時間はすでに予約が入っています。'); // エラーメッセージ
+            }
+        };
+
         return [
-            'reservation_date' => 'required|date|after_or_equal:today',
-            'room_id' => 'required|integer',
-            'start_time' => 'required|integer',
-            'use_time' => 'required|integer',
+            'reservation_date' => ['required', 'date', 'after_or_equal:today'],
+            'room_id' => ['required', 'integer'],
+            'start_time' => ['required', 'integer', $validate_func],
+            'use_time' => ['required', 'integer'],
 
         ];
     }

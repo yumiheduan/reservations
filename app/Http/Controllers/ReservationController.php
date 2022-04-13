@@ -68,17 +68,6 @@ class ReservationController extends Controller
         // 使用時間分をループするため$numに代入
         $num = $request->use_time;
 
-        // 指定した日付の予約時間割を取得（予約重複の防止）
-        // for ($i = 1; $i <= $num; $i++) {
-        //     $table = Time::whereDate('reservation_date', $request->reservation_date)
-        //     ->where('start_time', $request->start_time)
-        //     ->where('room_id', $request->room_id)->get();
-        //     $request->start_time++;
-        // }
-        //     if ($table != false) {
-        //         $errors  = 'その時間はすでに予約が入っています。';
-        //     }
-
         // time_tableテーブルへレコードのインサート
         for ($i = 1; $i <= $num; $i++) {
         // timesテーブルに登録する内容を連想配列にする。
