@@ -49,7 +49,7 @@
                             <button type="submit" class="btn btn-outline-danger mb-3"
                                 onclick="return confirm('本当に会員情報を削除しますか?');">情報削除</button>
                         </form>
-                        <a href="{{ route('members.index') }}" class="btn btn-secondary mb-3">処理終了</a>
+                        <a href="{{ route('times.index') }}" class="btn btn-secondary mb-3">処理終了</a>
                     </div>
                 </div>
             </div>

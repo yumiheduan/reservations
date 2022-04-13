@@ -52,7 +52,7 @@
         <!-- 送信ボタン -->
         <div class="my-2">
             <button class="btn btn-primary" type="submit">会員登録</button>
-            <a href="{{ route('members.index') }}" class="btn btn-outline-secondary">もどる</a>
+            <a href="{{ route('times.index') }}" class="btn btn-outline-secondary">処理終了</a>
         </div>
     </form>
     <!-- 送信ボタン ここまで -->
