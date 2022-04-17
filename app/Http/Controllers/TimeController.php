@@ -3,9 +3,6 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Reservation;
-use App\Member;
-use App\Room;
 use App\Time;
 use Carbon\Carbon;
 
@@ -26,14 +23,14 @@ class TimeController extends Controller
                 ->where('start_time', '=', $i)
                 ->where('room_id', '=', 1)
                 ->first();
-            }
+        }
 
         for ($i = 10; $i <= 23; $i++) {
             $table_b[] = Time::with('member')->whereDate('reservation_date', '=', $day)
                 ->where('start_time', '=', $i)
                 ->where('room_id', '=', 2)
                 ->first();
-            }
+        }
 
         return view('times.index', ['day' => $day, 'table_a' => $table_a, 'table_b' => $table_b]);
     }
@@ -102,5 +99,16 @@ class TimeController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function calender()
+    {
+        // for ($w = 0; $w <= 4; $w++) {
+            for ($i = 1; $i <= 7; $i++) {
+                $days[] = $i;
+            }
+        // }
+
+        return view('times.calender', ['days' => $days]);
     }
 }

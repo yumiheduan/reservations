@@ -11,6 +11,10 @@
 |
 */
 
+use App\Http\Controllers\TimeController;
+// use Illuminate\Routing\Route;
+// use Illuminate\Support\Facades\Route;
+
 Route::get('/', function () {
     return view('welcome');
 });
@@ -20,8 +24,11 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
+Route::get('/times/calender', 'TimeController@calender')->middleware('auth');
+
 Route::resource('/members', 'MemberController')->middleware('auth');
 
 Route::resource('/reservations', 'ReservationController')->middleware('auth');
 
 Route::resource('/times', 'TimeController')->middleware('auth');
+
