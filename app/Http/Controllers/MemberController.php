@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Requests\MemberRequest;
+use App\Http\Requests\SearchRequest;
 use App\Member;
 
 
@@ -14,14 +15,14 @@ class MemberController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index()
     {
-        $members = Member::where("kana_name", "like", $request->search. "%")->paginate(5);
+        // $members = Member::where("kana_name", "like", $request->search. "%")->paginate(5);
 
-        // ペジネーションリンク追加のために変数に代入
-        $search = $request->search;
+        // // ペジネーションリンク追加のために変数に代入
+        // $search = $request->search;
 
-        return view('members.index', ['members' => $members, 'search' => $search]);
+        return view('members.index');
     }
 
     /**
@@ -94,5 +95,19 @@ class MemberController extends Controller
     {
         $member->delete();
         return redirect()->route('members.index');
+    }
+
+    public function search(SearchRequest $request)
+    {
+        $members = Member::where("kana_name", "like", $request->search. "%")->paginate(5);
+
+        // ペジネーションリンク追加のために変数に代入
+        $search = $request->search;
+
+        if ($members->isEmpty()) {
+         $msg = '該当するメンバーは登録されていません。';
+        }
+        
+        return view('members.index', ['members' => $members, 'search' => $search, 'msg' => $msg]);
     }
 }

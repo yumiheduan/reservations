@@ -12,6 +12,7 @@
 */
 
 use App\Http\Controllers\TimeController;
+use App\Http\Controllers\MemberController;
 // use Illuminate\Routing\Route;
 // use Illuminate\Support\Facades\Route;
 
@@ -25,6 +26,7 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/times/calender', 'TimeController@calender')->middleware('auth');
+Route::get('/members/index', 'MemberController@search')->middleware('auth')->name('members.search');
 
 Route::resource('/members', 'MemberController')->middleware('auth');
 

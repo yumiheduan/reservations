@@ -30,11 +30,20 @@
                                 <a class="nav-link" aria-current="page" href="{{ route('times.index') }}">予約状況</a>
                             </li>
                         </ul>
-                        <form class="d-flex" action="{{ route('members.index') }}" method="get">
+                        <form class="d-flex" action="{{ route('members.search') }}" method="get">
                             @csrf
                             <input type="search" class="form-control me-sm-2" name="search" id="search" placeholder="会員検索" aria-label="会員検索">
                             <button type="submit" class="btn btn-outline-light flex-shrink-0">検索</button>
                         </form>
+
+                        @if (count($errors) > 0)
+                        <ul>
+                         @foreach ($errors->all() as $error)
+                         <li>{{ $error }}</li>
+                         @endforeach
+                        </ul>
+                        @endif
+                        
                     </div>
                     <!-- /.navbar-collapse -->
                     <!-- Authentication Links -->
