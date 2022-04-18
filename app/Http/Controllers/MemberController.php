@@ -104,7 +104,7 @@ class MemberController extends Controller
         $search = $request->search;
 
         if ($members->isEmpty()) {
-            $msg = '該当するメンバーは登録されていません。';
+            $msg = '該当するメンバーは登録されていません';
         } else {
             $msg = '検索結果';
         }
