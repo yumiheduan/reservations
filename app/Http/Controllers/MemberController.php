@@ -7,7 +7,6 @@ use App\Http\Requests\MemberRequest;
 use App\Http\Requests\SearchRequest;
 use App\Member;
 
-
 class MemberController extends Controller
 {
     /**
@@ -105,9 +104,11 @@ class MemberController extends Controller
         $search = $request->search;
 
         if ($members->isEmpty()) {
-         $msg = '該当するメンバーは登録されていません。';
+            $msg = '該当するメンバーは登録されていません。';
+        } else {
+            $msg = '検索結果';
         }
-        
+
         return view('members.index', ['members' => $members, 'search' => $search, 'msg' => $msg]);
     }
 }

@@ -5,14 +5,7 @@
 @section('navbar')
 
 @section('content')
-    <h1>会員一覧</h1>
-    <P>
-        @if (isset($msg))
-            {{ $msg }}
-        @endif
-    </P>
-
-
+    <h1>{{ $msg }}</h1>
     <a href="{{ route('members.create') }}" class="btn btn-success">新規追加</a>
 
     <!-- メンバー情報確認テーブル -->
