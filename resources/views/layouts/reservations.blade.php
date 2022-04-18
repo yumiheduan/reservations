@@ -27,23 +27,22 @@
                     <div class="collapse navbar-collapse" id="Navbar">
                         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                             <li class="nav-item">
-                                <a class="nav-link" aria-current="page" href="{{ route('times.index') }}">予約状況</a>
+                                <a class="nav-link" aria-current="page"
+                                    href="{{ route('times.index') }}">予約状況</a>
                             </li>
                         </ul>
                         <form class="d-flex" action="{{ route('members.search') }}" method="get">
                             @csrf
-                            <input type="search" class="form-control me-sm-2" name="search" id="search" placeholder="会員検索" aria-label="会員検索">
+                            <input type="search" name="search" id="search" placeholder="会員検索" aria-label="会員検索"
+                                class="form-control @error('search') is-invalid @enderror "
+                                aria-describedby="validateSearch">
+                            @error('search')
+                                <div id="validateSearch" class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                            @enderror
                             <button type="submit" class="btn btn-outline-light flex-shrink-0">検索</button>
                         </form>
-
-                        @if (count($errors) > 0)
-                        <ul>
-                         @foreach ($errors->all() as $error)
-                         <li>{{ $error }}</li>
-                         @endforeach
-                        </ul>
-                        @endif
-                        
                     </div>
                     <!-- /.navbar-collapse -->
                     <!-- Authentication Links -->
@@ -65,7 +64,7 @@
 
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                                 <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
-                                                 document.getElementById('logout-form').submit();">
+                                                         document.getElementById('logout-form').submit();">
                                     {{ __('Logout') }}
                                 </a>
 
