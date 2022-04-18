@@ -13,13 +13,7 @@
 
 @section('content')
     <h1>予約登録</h1>
-    {{-- @if (count($errors) > 0)
-        <ul>
-            @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-    @endif --}}
+    
     <!-- 入力フォーム -->
     <form action="{{ route('reservations.store') }}" method="post">
         @csrf
