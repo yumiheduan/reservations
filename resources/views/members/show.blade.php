@@ -11,6 +11,10 @@
     <div class="table">
         <table class="table table-striped table-bordered">
             <tr>
+                <th>会員番号</th>
+                <td>{{ $member->id }}</td>
+            </tr>
+            <tr>
                 <th>氏名かな</th>
                 <td>{{ $member->kana_name }}</td>
             </tr>
@@ -21,6 +25,10 @@
             <tr>
                 <th>Email</th>
                 <td>{{ $member->email }}</td>
+            </tr>
+            <tr>
+                <th>入会日</th>
+                <td>{{ $member->created_at->format('Y年m月d日') }}</td>
             </tr>
         </table>
 
