@@ -13,18 +13,18 @@
         <table class="table table-striped table-bordered">
             <thead>
                 <tr>
+                    <th>会員番号</th>
                     <th>氏名かな</th>
                     <th>電話番号</th>
-                    <th>Email</th>
                 </tr>
             </thead>
             <tbody>
 
                 @foreach ($members as $member)
                     <tr>
+                        <td>{{ $member->id }}</td>
                         <td>{{ $member->kana_name }}</td>
                         <td>{{ $member->phone }}</td>
-                        <td>{{ $member->email }}</td>
                         <td>
                             <a href="{{ route('members.show', $member) }}" class="btn btn-primary">会員詳細</a>
                         </td>
