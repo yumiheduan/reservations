@@ -16,11 +16,6 @@ class MemberController extends Controller
      */
     public function index()
     {
-        // $members = Member::where("kana_name", "like", $request->search. "%")->paginate(5);
-
-        // // ペジネーションリンク追加のために変数に代入
-        // $search = $request->search;
-
         return view('members.index');
     }
 
@@ -103,12 +98,6 @@ class MemberController extends Controller
         // ペジネーションリンク追加のために変数に代入
         $search = $request->search;
 
-        if ($members->isEmpty()) {
-            $msg = '該当するメンバーは登録されていません';
-        } else {
-            $msg = '検索結果';
-        }
-
-        return view('members.index', ['members' => $members, 'search' => $search, 'msg' => $msg]);
+        return view('members.index', ['members' => $members, 'search' => $search]);
     }
 }
