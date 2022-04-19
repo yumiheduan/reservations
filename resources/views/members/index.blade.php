@@ -6,7 +6,12 @@
 
 @section('content')
     <h1>検索結果</h1>
-    <a href="{{ route('members.create') }}" class="btn btn-success">新規追加</a>
+
+    <div class="card border-success">
+    <!-- 新規登録へのリンク -->
+    <div class="card-header" style="text-align: right;">
+        <a href="{{ route('members.create') }}" class="btn btn-success">新規追加</a>
+    </div>
 
     <!-- 登録がない場合のメッセージ表示 -->
     <div class="card-body text-success">
@@ -48,6 +53,7 @@
                 <!-- メンバー情報確認テーブル ここまで -->
                 {{ $members->appends(['search' => $search])->links() }}
         @endif
+    </div>
     </div>
 
 @endsection

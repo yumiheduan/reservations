@@ -10,7 +10,7 @@
         {{ $day->format('Y年m月d日') }}
     </div>
 
-    <!-- テーブル -->
+    <!-- 予約状況一覧テーブル -->
     <div class="card border-success">
         <!-- カレンダーへのリンク -->
         <div class="card-header" style="text-align: right;">
