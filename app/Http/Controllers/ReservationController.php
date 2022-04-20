@@ -15,11 +15,12 @@ class ReservationController extends Controller
     /**
      * 指定したmemberの予約一覧を表示する
      *
+     * @param Request $request
      * @return \Illuminate\Http\Response
      */
     public function index(Request $request)
     {
-        // 予約削除後も指定したmemberを保持する
+        // delete()実行後も指定したmemberを保持する
         if (!($request->session()->get('id') == null)) {
             $request->member_id = $request->session()->get('id');
         }
@@ -37,7 +38,7 @@ class ReservationController extends Controller
     }
 
     /**
-     * 予約登録画面を表示する
+     * 新しい予約情報を作成するためのフォームを表示する
      *
      * @return \Illuminate\Http\Response
      */
@@ -48,10 +49,12 @@ class ReservationController extends Controller
     }
 
     /**
-     * reservationsテーブル(予約情報)及び、
-     * timeテーブル(予約時間割)を登録する
+     * 指定したmemberIDでreservationsテーブル(予約情報)及び、
+     * timeテーブル(予約時間割)を保存する
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param Reservation $reservation
+     * @param Time $time
+     * @param ReservationRequest $request
      * @return \Illuminate\Http\Response
      */
     public function store(Reservation $reservation, Time $time, ReservationRequest $request)
@@ -70,7 +73,7 @@ class ReservationController extends Controller
 
         // time_tableテーブルへレコードのインサート
         for ($i = 1; $i <= $num; $i++) {
-        // timesテーブルに登録する内容を連想配列にする。
+        // times_tableテーブルに登録する内容を連想配列にする。
             $time_data = array(
                 'reservation_id' => $last_insert_id,
                 'member_id' => $request->member_id,
@@ -89,9 +92,9 @@ class ReservationController extends Controller
     }
 
     /**
-     * 指定した予約IDの詳細表示
+     * 指定した予約IDの詳細を表示する
      *
-     * @param  int  $id
+     * @param Reservation $reservation
      * @return \Illuminate\Http\Response
      */
     public function show(Reservation $reservation)
@@ -123,7 +126,7 @@ class ReservationController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Reservation $reservation)
+    public function edit()
     {
         //
     }
@@ -135,7 +138,7 @@ class ReservationController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(ReservationRequest $request, Reservation $reservation)
+    public function update()
     {
         //
     }
