@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Http\Requests\MemberRequest;
 use App\Http\Requests\SearchRequest;
 use App\Member;
+use App\Reservation;
+use Carbon\Carbon;
 
 class MemberController extends Controller
 {
@@ -85,10 +87,23 @@ class MemberController extends Controller
      * @param  \app\member $member
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Member $member)
+    public function destroy(Member $member, Reservation $reservations)
     {
-        $member->delete();
-        return redirect()->route('members.index');
+        // 指定した会員の本日の日付以降の予約の有無を確認する
+        $today = Carbon::today();
+        $reservations = Reservation::whereDate('reservation_date', '>=', $today)
+        ->where('member_id', $member->id)
+        ->orderBy('reservation_date', 'asc')->get();
+
+        // 予約が無ければ会員削除して本日のタイムスケジュールを表示する
+        if ($reservations->isEmpty()) {
+            $member->delete();
+            return redirect()->route('times.index');
+        // 予約があれば会員削除せずメッセージを表示する
+        } else {
+            $msg = '予約がある為、会員削除できません';
+            return view('members.show', ['member' => $member ,'msg' => $msg]);
+        }
     }
 
     /**

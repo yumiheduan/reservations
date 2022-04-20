@@ -6,10 +6,17 @@
 
 @section('content')
     <h1>会員情報</h1>
+    <!-- 予約がある場合のメッセージ表示 -->
+    <div class="card-header text-white bg-success">
+        @if (isset($msg))
+            <p>{{ $msg }}</p>
+        @endif
+    </div>
+    <!-- メッセージ ここまで -->
 
-    <div class="card border-success">
-        <!-- メンバー情報確認テーブル -->
-        <div class="table">
+    <!-- メンバー情報確認テーブル -->
+    <div class="table">
+        <div class="card border-success">
             <table class="table table-striped table-bordered">
                 <tr>
                     <th>会員番号</th>
@@ -62,9 +69,10 @@
                         </div>
                     </div>
                 </div>
-                <!-- 送信ボタン ここまで -->
-                <!-- メンバー情報確認テーブル ここまで -->
             </div>
+
+            <!-- 送信ボタン ここまで -->
+            <!-- メンバー情報確認テーブル ここまで -->
         </div>
     </div>
 @endsection
