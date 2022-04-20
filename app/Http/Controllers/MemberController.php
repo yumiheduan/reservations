@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Http\Requests\MemberRequest;
 use App\Http\Requests\SearchRequest;
 use App\Member;
@@ -10,7 +9,7 @@ use App\Member;
 class MemberController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * 会員のリストを表示する（検索結果）
      *
      * @return \Illuminate\Http\Response
      */
@@ -20,8 +19,9 @@ class MemberController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
+     * 新しい会員情報を作成するためのフォームを表示する
      *
+     * @param Member $member
      * @return \Illuminate\Http\Response
      */
     public function create(Member $member)
@@ -30,9 +30,9 @@ class MemberController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * 新しく作成した会員情報を保存する
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\MemberRequest  $request
      * @return \Illuminate\Http\Response
      */
     public function store(MemberRequest $request)
@@ -45,7 +45,7 @@ class MemberController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * 指定した会員の詳細情報を表示する
      *
      * @param App\Member $member
      * @return \Illuminate\Http\Response
@@ -56,7 +56,7 @@ class MemberController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * 会員の情報を編集するためのフォームを表示する
      *
      * @param App\Member $member
      * @return \Illuminate\Http\Response
@@ -67,7 +67,7 @@ class MemberController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * 指定した会員の情報を変更する
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  App\Member $member
@@ -80,7 +80,7 @@ class MemberController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * 指定した会員を削除する（物理的削除）
      *
      * @param  \app\member $member
      * @return \Illuminate\Http\Response
@@ -91,11 +91,17 @@ class MemberController extends Controller
         return redirect()->route('members.index');
     }
 
+    /**
+     * 会員を検索条件で抽出して取得する
+     *
+     * @param SearchRequest $request
+     * @return void
+     */
     public function search(SearchRequest $request)
     {
         $members = Member::where("kana_name", "like", $request->search. "%")->paginate(5);
 
-        // ペジネーションリンク追加のために変数に代入
+        // ペジネーションリンク追加のために変数に代入する
         $search = $request->search;
 
         return view('members.index', ['members' => $members, 'search' => $search]);
