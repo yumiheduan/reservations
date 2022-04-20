@@ -9,8 +9,9 @@ use Carbon\Carbon;
 class TimeController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * 指定した日付の予約時間割を取得してタイムテーブルを表示する
      *
+     * @param Time $time
      * @return \Illuminate\Http\Response
      */
     public function index(Time $time)
@@ -18,6 +19,7 @@ class TimeController extends Controller
         // 本日の日付を取得し一覧表示にする
         $day = Carbon::today();
 
+        // 指定した日付のAスタジオの予約時間割を取得して配列にする
         for ($i = 10; $i <= 23; $i++) {
             $table_a[] = Time::with('member')->whereDate('reservation_date', '=', $day)
                 ->where('start_time', '=', $i)
@@ -25,6 +27,7 @@ class TimeController extends Controller
                 ->first();
         }
 
+        // 指定した日付のBスタジオの予約時間割を取得して配列にする
         for ($i = 10; $i <= 23; $i++) {
             $table_b[] = Time::with('member')->whereDate('reservation_date', '=', $day)
                 ->where('start_time', '=', $i)
