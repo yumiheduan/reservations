@@ -23,9 +23,7 @@
                         <th>土</th>
                     </tr>
                     <tr>
-                        @foreach ($days as $day)
-                            <td>{{ $day }}</td>
-                        @endforeach
+                        <td></td>
                     </tr>
                 </table>
                 <!-- テーブルここまで -->
