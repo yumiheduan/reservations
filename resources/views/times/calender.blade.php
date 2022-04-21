@@ -36,8 +36,8 @@
                             <td><a href="./timetable.php?date=' . {{ $dateTime2->format('Y-m-d') }} . '">{{ $date2 }}</a></td>
                             @if ($loop->index % 7 == 6)
                     </tr>
-                    @endif
-                    @endforeach
+                            @endif
+                        @endforeach
                 </table>
                 <!-- テーブルここまで -->
 
