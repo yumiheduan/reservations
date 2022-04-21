@@ -162,18 +162,28 @@ class TimeController extends Controller
             for ($day = 0; $day < 7; $day++) {
                 if ($week == 0 && $day >= $beginDayOfWeek) {
                     // 月の1週目で、かつ、月初の日（曜日）以上のときは、日付のカウンタを表示して、1を足す
-                    $dates[] = $date;
+                    $dates1[] = $date;
                     $date++;
                     $dateTime2->add($interval);
                 } elseif ($week > 0 && $date <= $monthDays) {
                     // 月の2週目以降で、かつ、月末の日までのときは、日付のカウンタを表示して、1を足す
-                    $dates[] = $date;
+                    $dates2[] = $date;
                     $date++;
                     $dateTime2->add($interval);
                 }
             }
         }
-
-        return view('times.calender', ['dates' => $dates]);
+        return view(
+            'times.calender',
+            [
+            'dates1' => $dates1,
+            'dates2' => $dates2,
+            'beginDayOfWeek' => $beginDayOfWeek,
+            'weeks'=> $weeks,
+            'month' => $month,
+            'dateTime' => $dateTime,
+            'dateTime2' => $dateTime2,
+    ]
+        );
     }
 }

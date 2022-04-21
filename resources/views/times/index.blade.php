@@ -14,7 +14,7 @@
     <div class="card border-success">
         <!-- カレンダーへのリンク -->
         <div class="card-header" style="text-align: right;">
-            <a href="" class="btn btn-success">カレンダー表示</a>
+            <a href="{{ route('times.calender') }}" class="btn btn-success">カレンダー表示</a>
         </div>
         <div class="card-body text-success">
             <div class="table-responsive">
@@ -107,7 +107,7 @@
 
             <!-- カレンダーへのリンク -->
             <div class="card-footer" style="text-align: right;">
-                <a href="" class="btn btn-success">カレンダー表示</a>
+                <a href="{{ route('times.calender') }}" class="btn btn-success">カレンダー表示</a>
             </div>
 
         </div>
