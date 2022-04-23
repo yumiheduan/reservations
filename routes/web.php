@@ -26,6 +26,11 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/times/calender', 'TimeController@calender')->middleware('auth')->name('times.calender');
+
+Route::get('/times/member_index', 'TimeController@member_index')->name('times.member_index');
+
+Route::get('/times/member_calender', 'TimeController@member_calender')->name('times.member_calender');
+
 Route::get('/members/index', 'MemberController@search')->middleware('auth')->name('members.search');
 
 Route::resource('/members', 'MemberController')->middleware('auth');
