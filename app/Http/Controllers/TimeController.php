@@ -16,14 +16,21 @@ class TimeController extends Controller
      * @param Time $time
      * @return \Illuminate\Http\Response
      */
-    public function index(Time $time)
+    public function index(Request $request)
     {
-        // 本日の日付を取得し一覧表示にする
-        $day = Carbon::today();
+        // 今日の日付のDateTimeクラスのインスタンスを生成する。
+        $today = new DateTime();
 
+        // dd($request->day);
+        // GETされてきた日付または今日の日付を$dateに代入
+        if (isset($request->day)) {
+            $date = $request->day;
+        } else {
+            $date = $today->format('Y-m-d');
+        }
         // 指定した日付のAスタジオの予約時間割を取得して配列にする
         for ($i = 10; $i <= 23; $i++) {
-            $table_a[] = Time::with('member')->whereDate('reservation_date', '=', $day)
+            $table_a[] = Time::with('member')->whereDate('reservation_date', '=', $date)
                 ->where('start_time', '=', $i)
                 ->where('room_id', '=', 1)
                 ->first();
@@ -31,13 +38,20 @@ class TimeController extends Controller
 
         // 指定した日付のBスタジオの予約時間割を取得して配列にする
         for ($i = 10; $i <= 23; $i++) {
-            $table_b[] = Time::with('member')->whereDate('reservation_date', '=', $day)
+            $table_b[] = Time::with('member')->whereDate('reservation_date', '=', $date)
                 ->where('start_time', '=', $i)
                 ->where('room_id', '=', 2)
                 ->first();
         }
 
-        return view('times.index', ['day' => $day, 'table_a' => $table_a, 'table_b' => $table_b]);
+        return view(
+            'times.index',
+            [
+                'date' => $date,
+                'table_a' => $table_a,
+                'table_b' => $table_b
+            ]
+        );
     }
 
     /**
@@ -155,35 +169,30 @@ class TimeController extends Controller
         // 一日のDateIntervalクラスのインスタンスを作成する。
         $interval = new DateInterval('P1D');
 
-
         //    当月にある週数分繰り返し
         for ($week = 0; $week < $weeks; $week++) {
             // 一週間の日数分（7日分）繰り返し
             for ($day = 0; $day < 7; $day++) {
                 if ($week == 0 && $day >= $beginDayOfWeek) {
-                    // 月の1週目で、かつ、月初の日（曜日）以上のときは、日付のカウンタを表示して、1を足す
-                    $dates1[] = $date;
-                    $date++;
+                    $weeks1[] = clone $dateTime2;
                     $dateTime2->add($interval);
                 } elseif ($week > 0 && $date <= $monthDays) {
                     // 月の2週目以降で、かつ、月末の日までのときは、日付のカウンタを表示して、1を足す
-                    $dates2[] = $date;
-                    $date++;
+                    $weeks2[] = clone $dateTime2;
                     $dateTime2->add($interval);
                 }
             }
         }
+
         return view(
             'times.calender',
             [
-            'dates1' => $dates1,
-            'dates2' => $dates2,
-            'beginDayOfWeek' => $beginDayOfWeek,
-            'weeks'=> $weeks,
-            'month' => $month,
-            'dateTime' => $dateTime,
-            'dateTime2' => $dateTime2,
-    ]
+                'weeks1' => $weeks1,
+                'weeks2' => $weeks2,
+                'beginDayOfWeek' => $beginDayOfWeek,
+                'month' => $month,
+                'dateTime' => $dateTime,
+            ]
         );
     }
 }

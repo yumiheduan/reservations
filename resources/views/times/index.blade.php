@@ -7,7 +7,7 @@
 @section('content')
     <h1>予約状況</h1>
     <div class="card-header text-white bg-success">
-        {{ $day->format('Y年m月d日') }}
+        {{ $date }}
     </div>
 
     <!-- 予約状況一覧テーブル -->

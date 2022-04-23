@@ -27,24 +27,28 @@
                         @for ($i = 0; $i < $beginDayOfWeek; $i++)
                             <td></td>
                         @endfor
-                        @foreach ($dates1 as $date1)
-                            <td><a href="./timetable.php?date=' . {{ $dateTime2->format('Y-m-d') }} . '">{{ $date1 }}</a></a></td>
+                        @foreach ($weeks1 as $day)
+                            <td>
+                                <a href="{{ route('times.index', ['day' => $day->format('Y-m-d')] ) }}">{{ $day->format('j') }}</a>
+                            </td>
                         @endforeach
                     </tr>
                     <tr>
-                        @foreach ($dates2 as $date2)
-                            <td><a href="./timetable.php?date=' . {{ $dateTime2->format('Y-m-d') }} . '">{{ $date2 }}</a></td>
-                            @if ($loop->index % 7 == 6)
+                        @foreach ($weeks2 as $day)
+                            <td>
+                                <a href="{{ route('times.index', ['day' => $day->format('Y-m-d')] ) }}">{{ $day->format('j') }}</a>
+                                @if ($loop->index % 7 == 6)
+                            </td>
                     </tr>
-                            @endif
+                                @endif
                         @endforeach
                 </table>
                 <!-- テーブルここまで -->
 
                 <div class="card-footer" style="text-align: center;">
-                <a href="{{ route('times.calender') }} " class="btn btn-outline-success">&lt;&lt;前の月</a>
+                    <a href="{{ route('times.calender', ['month' => $month - 1] )}} " class="btn btn-outline-success">&lt;&lt;前の月</a>
                     <a href="{{ route('times.calender') }}" class="btn btn-success">今月</a>
-                    <a href="{{ route('times.calender') }}" class="btn btn-outline-success">次の月&gt;&gt;</a>
+                    <a href="{{ route('times.calender', ['month' => $month + 1] ) }}" class="btn btn-outline-success">次の月&gt;&gt;</a>
                 </div>
             </div>
         </div>
