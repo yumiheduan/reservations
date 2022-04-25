@@ -8,7 +8,7 @@
     <h1>予約カレンダー</h1>
     <h4>{{ $dateTime->format('Y年n月') }}</h4>
 
-    <!-- カレンダー表示 -->
+    <!-- 公開用カレンダー表示 -->
     <div class="card border-success">
         <!-- カレンダーへのリンク -->
         <div class="card-body text-success">
@@ -46,9 +46,9 @@
                 <!-- テーブルここまで -->
 
                 <div class="card-footer" style="text-align: center;">
-                    <a href="{{ route('times.calender', ['month' => $month - 1] )}} " class="btn btn-outline-success">&lt;&lt;前の月</a>
-                    <a href="{{ route('times.calender') }}" class="btn btn-success">今月</a>
-                    <a href="{{ route('times.calender', ['month' => $month + 1] ) }}" class="btn btn-outline-success">次の月&gt;&gt;</a>
+                    <a href="{{ route('times.member_calender', ['month' => $month - 1] )}} " class="btn btn-outline-success">&lt;&lt;前の月</a>
+                    <a href="{{ route('times.member_calender') }}" class="btn btn-success">今月</a>
+                    <a href="{{ route('times.member_calender', ['month' => $month + 1] ) }}" class="btn btn-outline-success">次の月&gt;&gt;</a>
                 </div>
             </div>
         </div>

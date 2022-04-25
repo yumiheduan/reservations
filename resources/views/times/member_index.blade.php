@@ -10,7 +10,7 @@
         {{ $date }}
     </div>
 
-    <!-- 予約状況一覧テーブル -->
+    <!-- 公開用予約状況一覧テーブル -->
     <div class="card border-success">
         <!-- カレンダーへのリンク -->
         <div class="card-header" style="text-align: right;">
