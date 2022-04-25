@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Time;
-use Carbon\Carbon;
 use DateTime;
 use DateInterval;
 
@@ -172,6 +171,9 @@ class TimeController extends Controller
         // 一日のDateIntervalクラスのインスタンスを作成する。
         $interval = new DateInterval('P1D');
 
+        // 日付のカウンターを用意する
+        $cnt = 0;
+
         //    当月にある週数分繰り返し
         for ($week = 0; $week < $weeks; $week++) {
             // 一週間の日数分（7日分）繰り返し
@@ -180,10 +182,20 @@ class TimeController extends Controller
                 if ($week == 0 && $day >= $beginDayOfWeek) {
                     $weeks1[] = clone $dateTime2;
                     $dateTime2->add($interval);
+                    $cnt++;
+                    // カウンターが最後の日付になれば処理終了
+                    if ($cnt >= $monthDays) {
+                        break;
+                    }
                 } elseif ($week > 0 && $date <= $monthDays) {
                     // 月の2週目以降で、かつ、月末の日までのときは、日付のクローンを作成し配列に入れて1を足す
                     $weeks2[] = clone $dateTime2;
                     $dateTime2->add($interval);
+                    $cnt++;
+                    // カウンターが最後の日付になれば処理終了
+                    if ($cnt >= $monthDays) {
+                        break;
+                    }
                 }
             }
         }
@@ -296,6 +308,9 @@ class TimeController extends Controller
         // 一日のDateIntervalクラスのインスタンスを作成する。
         $interval = new DateInterval('P1D');
 
+        // 日付のカウンターを用意する
+        $cnt = 0;
+
         //    当月にある週数分繰り返し
         for ($week = 0; $week < $weeks; $week++) {
             // 一週間の日数分（7日分）繰り返し
@@ -304,10 +319,20 @@ class TimeController extends Controller
                 if ($week == 0 && $day >= $beginDayOfWeek) {
                     $weeks1[] = clone $dateTime2;
                     $dateTime2->add($interval);
+                    $cnt++;
+                    // カウンターが最後の日付になれば処理終了
+                    if ($cnt >= $monthDays) {
+                        break;
+                    }
                 } elseif ($week > 0 && $date <= $monthDays) {
                     // 月の2週目以降で、かつ、月末の日までのときは、日付のクローンを作成し配列に入れて1を足す
                     $weeks2[] = clone $dateTime2;
                     $dateTime2->add($interval);
+                    $cnt++;
+                    // カウンターが最後の日付になれば処理終了
+                    if ($cnt >= $monthDays) {
+                        break;
+                    }
                 }
             }
         }
@@ -323,5 +348,4 @@ class TimeController extends Controller
             ]
         );
     }
-
 }
