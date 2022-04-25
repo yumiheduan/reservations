@@ -16,7 +16,7 @@
                 <div class="col-sm-10">
                     <input type="text" name="kana_name" id="kana_name"
                         class="form-control @error('kana_name') is-invalid @enderror " value="{{ old('kana_name') }}"
-                        aria-describedby="validateKana_name" placeholder="ひらがな入力">
+                        aria-describedby="validateKana_name" placeholder="スペースなしのひらがなで入力">
                     @error('kana_name')
                         <div id="validateKana_name" class="invalid-feedback">
                             {{ $message }}
@@ -28,7 +28,7 @@
                 <label for="phone" class="col-sm-2 col-form-label">電話番号</label>
                 <div class="col-sm-10">
                     <input type="text" name="phone" id="phone" class="form-control @error('phone') is-invalid @enderror "
-                        value="{{ old('phone') }}" placeholder="半角数字入力">
+                        value="{{ old('phone') }}" placeholder="半角数字とーで入力 (例:080-1111-2222)">
                     @error('phone')
                         <div id="validatePhone" class="invalid-feedback">
                             {{ $message }}

@@ -47,7 +47,7 @@ class MemberRequest extends FormRequest
         return [
             'kana_name.required' => '氏名かなを入力してください。',
             'kana_name.max:100' => '氏名かなは100文字以下にしてください。',
-            'kana_name.regex'=> '氏名かなはひらがなだけで入力してください。',
+            'kana_name.regex'=> '氏名かなはスペース無しのひらがなだけで入力してください。',
             'phone.regex' => '電話番号は半角数字とハイフンで入力してください。',
             'phone.unique' => 'このメンバーはすでに登録されています。',
             'email.email' => 'Emailは255文字以下にしてください。',
