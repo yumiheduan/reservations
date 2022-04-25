@@ -27,16 +27,16 @@
                         @for ($i = 0; $i < $beginDayOfWeek; $i++)
                             <td></td>
                         @endfor
-                        @foreach ($weeks1 as $day)
+                        @foreach ($weeks1 as $date)
                             <td>
-                                <a href="{{ route('times.member_index', ['day' => $day->format('Y-m-d')] ) }}">{{ $day->format('j') }}</a>
+                                <a href="{{ route('times.member_index', ['day' => $date->format('Y-m-d')] ) }}">{{ $date->format('j') }}</a>
                             </td>
                         @endforeach
                     </tr>
                     <tr>
-                        @foreach ($weeks2 as $day)
+                        @foreach ($weeks2 as $date)
                             <td>
-                                <a href="{{ route('times.member_index', ['day' => $day->format('Y-m-d')] ) }}">{{ $day->format('j') }}</a>
+                                <a href="{{ route('times.member_index', ['day' => $date->format('Y-m-d')] ) }}">{{ $date->format('j') }}</a>
                                 @if ($loop->index % 7 == 6)
                             </td>
                         </tr>
