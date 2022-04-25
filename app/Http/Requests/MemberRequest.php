@@ -27,7 +27,7 @@ class MemberRequest extends FormRequest
         return [
             'kana_name' =>  'required|max:100|regex:/^[ぁ-んー]+$/',
             'phone' => [
-                'regex:/^[0-9-]+$/',
+                'regex:/^0\d{2,3}-\d{1,4}-\d{4}$/',
                 // membersテーブルでユニーク制約。ignoreで入力されたidはバリデーションから除外する
                 Rule::unique('members')->ignore($this->id)->where(function ($query) {
                     // 入力されたkana_nameの値と同じ値を持つレコードでのみ検証する
