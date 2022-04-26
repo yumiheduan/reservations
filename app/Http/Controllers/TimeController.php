@@ -7,6 +7,9 @@ use App\Time;
 use DateTime;
 use DateInterval;
 
+/**
+ * 日ごとの予約情報の表示(タイムテーブル)と予約確認用のカレンダーの表示を行うクラス
+ */
 class TimeController extends Controller
 {
     /**
@@ -121,7 +124,7 @@ class TimeController extends Controller
 
     /**
      * indexで日付を指定するためのカレンダーを表示する
-     * 
+     *
      * @param  Request $request
      * @return \Illuminate\Http\Response
      */
@@ -257,7 +260,7 @@ class TimeController extends Controller
 
     /**
      * indexで日付を指定するためのカレンダーを表示する
-     * 
+     *
      * @param  Request $request
      * @return \Illuminate\Http\Response
      */

@@ -8,6 +8,9 @@ use App\Member;
 use App\Reservation;
 use Carbon\Carbon;
 
+/**
+ * 会員情報の登録、修正、削除、検索、詳細表示を行うクラス
+ */
 class MemberController extends Controller
 {
     /**

@@ -10,6 +10,10 @@ use App\Time;
 use App\Http\Requests\ReservationRequest;
 use Carbon\Carbon;
 
+/**
+ * 予約情報の親テーブル(reservations)と子テーブル(times)に登録または削除を行い、
+ * 会員毎の予約情報の表示を行うクラス
+ */
 class ReservationController extends Controller
 {
     /**
