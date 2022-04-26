@@ -49,7 +49,7 @@
                     <table class="table table-striped table-bordered">
                         <thead>
                             <tr>
-                                <th>予約日時</th>
+                                <th>予約日</th>
                             </tr>
                         </thead>
                         <tbody>
