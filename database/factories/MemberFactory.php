@@ -5,6 +5,9 @@
 use App\Member;
 use Faker\Generator as Faker;
 
+/**
+ * データベースをテスト/シードする為のファーカー
+ */
 $factory->define(Member::class, function (Faker $faker) {
     return [
         'kana_name' => mb_convert_kana(str_replace(' ','',$faker->kanaName), 'c'),
