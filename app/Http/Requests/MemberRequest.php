@@ -5,10 +5,13 @@ namespace App\Http\Requests;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
+/**
+ * 会員登録及び更新のバリデーションクラス
+ */
 class MemberRequest extends FormRequest
 {
     /**
-     * Determine if the user is authorized to make this request.
+     * ユーザーがこの要求を行うことを許可されているかどうかを確認する
      *
      * @return bool
      */
@@ -18,7 +21,7 @@ class MemberRequest extends FormRequest
     }
 
     /**
-     * リクエストに適用される検証ルールを取得する。
+     * リクエストに適用される検証ルールを取得する
      *
      * @return array
      */
@@ -28,9 +31,9 @@ class MemberRequest extends FormRequest
             'kana_name' =>  'required|max:100|regex:/^[ぁ-んー]+$/',
             'phone' => [
                 'regex:/^0\d{2,3}-\d{1,4}-\d{4}$/',
-                // membersテーブルでユニーク制約。ignoreで入力されたidはバリデーションから除外する
+                // memberのidはユニーク制約の為、ignoreで入力されたidはバリデーションから除外する
                 Rule::unique('members')->ignore($this->id)->where(function ($query) {
-                    // 入力されたkana_nameの値と同じ値を持つレコードでのみ検証する
+                    // 入力されたkana_nameのidと同じidを持つレコードでのみ検証する
                     $query->where('kana_name', $this->kana_name);
                 }),
             ],
@@ -39,7 +42,7 @@ class MemberRequest extends FormRequest
     }
 
     /**
-     * バリデーションエラーのメッセージをカスタマイズする *
+     * バリデーションエラーのメッセージをカスタマイズする
      * @return array
      */
     public function messages()

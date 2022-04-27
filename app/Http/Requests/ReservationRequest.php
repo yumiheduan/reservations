@@ -5,10 +5,13 @@ namespace App\Http\Requests;
 use Illuminate\Foundation\Http\FormRequest;
 use App\Time;
 
+/**
+ * 予約登録のバリデーションクラス
+ */
 class ReservationRequest extends FormRequest
 {
     /**
-     * Determine if the user is authorized to make this request.
+     * ユーザーがこの要求を行うことを許可されているかどうかを確認する
      *
      * @return bool
      */
@@ -18,17 +21,17 @@ class ReservationRequest extends FormRequest
     }
 
     /**
-     * リクエストに適用される検証ルールを取得する。
+     * リクエストに適用される検証ルールを取得する
      *
      * @return array
      */
     public function rules()
     {
         /**
-         * 予約重複登録の防止バリデーション
+         * 予約重複登録の防止のメソッド
          *   $attribute: 検証中の属性名
          *   $value    : 検証中の属性の値
-         *   $fail     : 失敗時に呼び出すメソッド?
+         *   $fail     : 失敗時に呼び出すメソッド
          **/
         $validate_func = function ($attribute, $value, $fail) {
 
@@ -42,10 +45,10 @@ class ReservationRequest extends FormRequest
             }
         };
         /**
-         * 24時以降予約登録の防止バリデーション（営業時間が24時までの為）
+         * 24時以降予約登録の防止のメソッド（営業時間が24時までの為）
          *   $attribute: 検証中の属性名
          *   $value    : 検証中の属性の値
-         *   $fail     : 失敗時に呼び出すメソッド?
+         *   $fail     : 失敗時に呼び出すメソッド
          **/
         $validate_time = function ($attribute, $value, $fail) {
 
@@ -55,7 +58,7 @@ class ReservationRequest extends FormRequest
                 $fail('営業時間は24時までです。'); // エラーメッセージ
             }
         };
-        
+
         return [
             'reservation_date' => ['required', 'date', 'after_or_equal:today'],
             'room_id' => ['required', 'integer'],
@@ -66,7 +69,7 @@ class ReservationRequest extends FormRequest
     }
 
     /**
-     * バリデーションエラーのメッセージをカスタマイズする 。
+     * バリデーションエラーのメッセージをカスタマイズする
      * @return array
      */
     public function messages()

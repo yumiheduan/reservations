@@ -3,12 +3,14 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rule;
 
+/**
+ * 会員検索のバリデーションクラス
+ */
 class SearchRequest extends FormRequest
 {
     /**
-     * Determine if the user is authorized to make this request.
+     * ユーザーがこの要求を行うことを許可されているかどうかを確認する
      *
      * @return bool
      */
@@ -18,7 +20,7 @@ class SearchRequest extends FormRequest
     }
 
     /**
-     * リクエストに適用される検証ルールを取得する。
+     * リクエストに適用される検証ルールを取得する
      *
      * @return array
      */
@@ -30,14 +32,14 @@ class SearchRequest extends FormRequest
     }
 
     /**
-     * バリデーションエラーのメッセージをカスタマイズする *
+     * バリデーションエラーのメッセージをカスタマイズする
      * @return array
      */
     public function messages()
     {
         return [
             'search.required' => 'ひらがなを入力してください。',
-            'search.regex'=> 'ひらがなを入力してください。',
+            'search.regex'=> 'ひらがなで入力してください。',
         ];
     }
 }
