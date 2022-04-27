@@ -4,8 +4,14 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * ReservationModelクラス
+ */
 class Reservation extends Model
 {
+    /**
+     * リレーション
+     */
     public function member()
     {
         return $this->belongsTo('App\Member');
@@ -21,7 +27,9 @@ class Reservation extends Model
         return $this->hasMany('App\Time');
     }
 
-
+    /**
+     * @var array 値を代入しないプロパティ
+     */
     protected $guarded = ['id',];
     protected $dates = ['reservation_date'];
 }
