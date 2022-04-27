@@ -54,6 +54,5 @@
                 {{ $members->appends(['search' => $search])->links() }}
         @endif
     </div>
-    </div>
 
 @endsection

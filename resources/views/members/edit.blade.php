@@ -63,9 +63,5 @@
                     </div>
         </form>
     </div>
-    </div>
-    </div>
     <!-- 入力フォーム ここまで -->
-    </div>
-
 @endsection

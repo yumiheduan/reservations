@@ -60,8 +60,6 @@
                         </div>
         </form>
     </div>
-    </div>
     <!-- 送信ボタン ここまで -->
-    </div>
 
 @endsection

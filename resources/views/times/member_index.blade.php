@@ -111,10 +111,7 @@
                 <a href="{{ route('times.member_index',['date' => $date]) }}" class="btn btn-outline-success">最新情報に更新</a>
                 <a href="{{ route('times.member_calender') }}" class="btn btn-success">カレンダー表示</a>
             </div>
-
         </div>
-    </div>
-    </div>
     </div>
     <!-- コンテナ ここまで -->
 @endsection
