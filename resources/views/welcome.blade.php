@@ -81,7 +81,7 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                    Laravel
+                    音楽スタジオ予約システム
                 </div>
 
                 <div class="links">
