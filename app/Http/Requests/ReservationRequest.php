@@ -39,7 +39,7 @@ class ReservationRequest extends FormRequest
             if (Time::whereDate('reservation_date', '=', $this->reservation_date)
                 ->where('room_id', '=', $this->room_id)
                 ->where('start_time', '>=', $this->start_time)
-                ->where('start_time', '<=', $this->start_time + $this->use_time)->exists()
+                ->where('start_time', '<=', $this->start_time + $this->use_time -1)->exists()
             ){
                 $fail('その時間はすでに予約が入っています。'); // エラーメッセージ
             }
