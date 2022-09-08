@@ -17,7 +17,7 @@
         <!-- ナビゲーション -->
         <nav class="navbar navbar-expand-lg navbar-dark bg-success">
             <div class="container-fluid">
-                <a class="navbar-brand" href="#">ーースタジオ未来のかたち予約サイトーー</a>
+                <a class="navbar-brand" href="#">ーースタジオJamJAm予約サイトーー</a>
                 <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#Navbar"
                     aria-controls="Navbar" aria-expanded="false" aria-label="ナビゲーションの切替"> --}}
                     <span class="navbar-toggler-icon"></span>
