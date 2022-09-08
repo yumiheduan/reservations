@@ -1,7 +1,5 @@
 @extends('layouts.reservations')
 
-@section('title', 'members_create')
-
 @section('navbar')
 
 @section('content')

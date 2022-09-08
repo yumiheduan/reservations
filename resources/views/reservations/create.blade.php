@@ -7,8 +7,6 @@
 
 </style>
 
-@section('title', 'reservations_create')
-
 @section('navbar')
 
 @section('content')

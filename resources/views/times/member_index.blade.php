@@ -1,7 +1,5 @@
 @extends('layouts.members')
 
-@section('title', 'member_index')
-
 @section('navbar')
 
 @section('content')

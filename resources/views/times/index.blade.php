@@ -1,6 +1,6 @@
 @extends('layouts.reservations')
 
-@section('title', 'times_index')
+{{-- @section('title', 'times_index') --}}
 
 @section('navbar')
 
