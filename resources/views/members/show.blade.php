@@ -5,7 +5,7 @@
 @section('content')
     <h1>会員情報</h1>
     <!-- 予約がある場合のメッセージ表示 -->
-    <div class="card-header text-white bg-success">
+    <div class="card-header text-white bg-danger">
         @if (isset($msg))
             <p>{{ $msg }}</p>
         @endif
