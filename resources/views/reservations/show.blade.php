@@ -4,8 +4,8 @@
 
 @section('content')
     <h1>予約詳細</h1>
-    <div class="card-header text-white bg-success">
-        {{ $member->kana_name }} 様
+    <div class="alert alert-success" role="alert">
+        <h4 class="alert-heading">{{ $member->kana_name }} 様</h4>
     </div>
     <!-- 予約詳細確認テーブル -->
     <div class="card border-success">
@@ -48,8 +48,8 @@
                     </div>
                 </div>
             </div>
-                <!-- 送信ボタン ここまで -->
-            </div>
-            <!-- 予約詳細確認テーブル ここまで -->
+            <!-- 送信ボタン ここまで -->
         </div>
-    @endsection
+        <!-- 予約詳細確認テーブル ここまで -->
+    </div>
+@endsection

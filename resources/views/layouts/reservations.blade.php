@@ -30,6 +30,10 @@
                                 <a class="nav-link" aria-current="page"
                                     href="{{ route('times.index') }}">本日の予約状況</a>
                             </li>
+                            <li class="nav-item">
+                                <a class="nav-link" aria-current="page"
+                                    href="{{ route('times.calender') }}">カレンダー表示</a>
+                            </li>
                         </ul>
                         <form class="d-flex" action="{{ route('members.search') }}" method="get">
                             @csrf

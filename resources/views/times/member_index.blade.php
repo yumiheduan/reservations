@@ -4,9 +4,9 @@
 
 @section('content')
     <h1>スタジオ空き状況</h1>
-    <div class="card-header text-white bg-success">
-        {{ $date }}
-    </div>
+        <div class="alert alert-success" role="alert">
+            <h4 class="alert-heading">{{ $date }}</h4>
+           </div>
 
     <!-- 公開用予約状況一覧テーブル -->
     <div class="card border-success">

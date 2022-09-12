@@ -4,12 +4,12 @@
 
 @section('content')
     <h1>会員情報</h1>
-    <!-- 予約がある場合のメッセージ表示 -->
-    <div class="card-header text-white bg-danger">
+        <!-- 予約がある場合のメッセージ表示 -->
         @if (isset($msg))
-            <p>{{ $msg }}</p>
+            <div class="alert alert-danger" role="alert">
+                <h4 class="alert-heading">{{ $msg }}</h4>
+            </div>
         @endif
-    </div>
     <!-- メッセージ ここまで -->
 
     <!-- メンバー情報確認テーブル -->

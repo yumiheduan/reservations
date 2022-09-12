@@ -23,7 +23,6 @@ class TimeController extends Controller
         // 今日の日付のDateTimeクラスのインスタンスを生成する。
         $today = new DateTime();
 
-        // dd($request->day);
         // GETされてきた日付または今日の日付を$dateに代入
         if (isset($request->day)) {
             $date = $request->day;
@@ -44,7 +43,7 @@ class TimeController extends Controller
                 ->where('start_time', '=', $i)
                 ->where('room_id', '=', 2)
                 ->first();
-        }
+        } 
 
         return view(
             'times.index',

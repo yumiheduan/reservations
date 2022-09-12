@@ -1,21 +1,15 @@
 @extends('layouts.reservations')
 
-{{-- @section('title', 'times_index') --}}
-
 @section('navbar')
 
 @section('content')
     <h1>予約状況</h1>
-    <div class="card-header text-white bg-success">
-        {{ $date }}
+        <div class="alert alert-success" role="alert">
+            <h4 class="alert-heading">{{ $date }}</h4>
     </div>
 
     <!-- 予約状況一覧テーブル -->
     <div class="card border-success">
-        <!-- カレンダーへのリンク -->
-        <div class="card-header" style="text-align: right;">
-            <a href="{{ route('times.calender') }}" class="btn btn-success">カレンダー表示</a>
-        </div>
         <div class="card-body text-success">
             <div class="table-responsive">
                 <table class="table table-striped table-bordered">

@@ -11,16 +11,15 @@
 
 @section('content')
     <h1>予約登録</h1>
+    <div class="alert alert-success" role="alert">
+        <h4 class="alert-heading">{{ $member->kana_name }} 様</h4>
+       </div>
 
     <!-- 入力フォーム -->
     <div class="card border-success">
         <form action="{{ route('reservations.store') }}" method="post">
             @csrf
             <input type="hidden" name="member_id" value="{{ $member->id }}">
-            {{-- <div class="col-md"> --}}
-            <div class="card-header text-white bg-success">
-                {{ $member->kana_name }} 様
-            </div>
 
             <div class="m-4 row">
                 <label for="reservation_date" class="col-sm-2 col-form-label">予約日</label>
