@@ -13,6 +13,11 @@
         <div class="card-body text-success">
             <div class="table-responsive">
                 <table class="table table-striped table-bordered">
+
+                <!-- カレンダーへのリンク -->
+                <div class="card-footer" style="text-align: right;">
+                    <a href="{{ route('times.calender') }}" class="btn btn-success">カレンダー表示</a>
+                </div>
                     <thead>
                         <tr>
                             <th>時間</th>
