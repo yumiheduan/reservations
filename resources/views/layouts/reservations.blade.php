@@ -34,6 +34,10 @@
                                 <a class="nav-link" aria-current="page"
                                     href="{{ route('times.calender') }}">カレンダー表示</a>
                             </li>
+                            <li class="nav-item">
+                                <a class="nav-link" aria-current="page"
+                                    href="{{ route('members.list') }}">会員一覧</a>
+                            </li>
                         </ul>
                         <form class="d-flex" action="{{ route('members.search') }}" method="get">
                             @csrf

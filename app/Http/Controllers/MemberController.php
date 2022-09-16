@@ -124,4 +124,11 @@ class MemberController extends Controller
 
         return view('members.index', ['members' => $members, 'search' => $search]);
     }
+
+    public function list()
+    {
+        $members = Member::orderBy('id')->paginate(10);
+
+        return view('members.list', compact('members'));
+    }
 }

@@ -14,7 +14,8 @@
 use App\Http\Controllers\TimeController;
 use App\Http\Controllers\MemberController;
 // use Illuminate\Routing\Route;
-// use Illuminate\Support\Facades\Route;
+
+use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
@@ -32,6 +33,9 @@ Route::get('/times/member_index', 'TimeController@member_index')->name('times.me
 Route::get('/times/member_calender', 'TimeController@member_calender')->name('times.member_calender');
 
 Route::get('/members/index', 'MemberController@search')->middleware('auth')->name('members.search');
+Route::get('/members/list', 'MemberController@search')->middleware('auth')->name('members.list');
+
+Route::get('/members/list', 'MemberController@list')->middleware('auth')->name('members.list');
 
 Route::resource('/members', 'MemberController')->middleware('auth');
 
