@@ -125,6 +125,12 @@ class MemberController extends Controller
         return view('members.index', ['members' => $members, 'search' => $search]);
     }
 
+    /**
+     * 会員一覧を表示する
+     * 
+     * @param  \app\member $members
+     * @return \Illuminate\Http\Response
+     */
     public function list()
     {
         $members = Member::orderBy('id')->paginate(10);
