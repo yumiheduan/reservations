@@ -18,7 +18,7 @@
         <!-- ナビゲーション -->
         <nav class="navbar navbar-expand-lg navbar-dark bg-success">
             <div class="container-fluid">
-                <a class="navbar-brand" href="#">スタジオ予約管理</a>
+                <a class="navbar-brand">スタジオ予約管理</a>
                 <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#Navbar"
                     aria-controls="Navbar" aria-expanded="false" aria-label="ナビゲーションの切替">
                     <span class="navbar-toggler-icon"></span>

@@ -6,7 +6,7 @@
     <h1>予約状況</h1>
         <div class="alert alert-success" role="alert">
             <h4 class="alert-heading">{{ $date }}</h4>
-    </div>
+        </div>
 
     <!-- 予約状況一覧テーブル -->
     <div class="card border-success">
