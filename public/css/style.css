@@ -1,0 +1,8 @@
+.btn-group {
+    flex-wrap: wrap;
+    }
+    
+    .btn.a {
+    white-space: nowrap;
+    margin: 0 2px;
+    }
