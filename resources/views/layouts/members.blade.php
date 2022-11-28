@@ -17,7 +17,7 @@
         <!-- ナビゲーション -->
         <nav class="navbar navbar-expand-lg navbar-dark bg-success">
             <div class="container-fluid">
-                <a class="navbar-brand" href="#">ーー スタジオJamJam ーー</a>
+                <a class="navbar-brand" href="https://fujiiderajamjam.jimdofree.com/">ーー スタジオJamJam ーー</a>
                 <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#Navbar"
                     aria-controls="Navbar" aria-expanded="false" aria-label="ナビゲーションの切替">
                     <span class="navbar-toggler-icon"></span>
